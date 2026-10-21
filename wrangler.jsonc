@@ -8,6 +8,7 @@
 		{
 			"binding": "DB",
 			"database_name": "emdash-blog",
+			"database_id": "f0866ea7-bf06-4614-8608-aa722b80f87f",
 		},
 	],
 	"r2_buckets": [

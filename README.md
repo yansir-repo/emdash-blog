@@ -50,3 +50,9 @@ pnpm deploy
 - 原站 `uses` / `speaking` 页是模板遗留且不在导航里，未迁移。
 - 订阅表单 `/thank-you` 与原站一样仍是静态占位，尚未接邮件服务。
 - RSS 地址保持 `/feed.xml`，并带全文。
+
+## 关于 `cf` CLI
+
+`cf migrate`（beta）能把 Wrangler 配置转成 `cloudflare.config.ts`，但 `cf deploy` 要求项目构建出 Build Output Specification
+（`.cloudflare/output/v0/config.json`），而 Astro 的 Cloudflare adapter 目前只产出 `dist/server/wrangler.json`，
+所以本项目继续用 `wrangler deploy`。当 adapter 支持该输出规范时再迁移。

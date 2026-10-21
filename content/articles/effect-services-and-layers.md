@@ -1,7 +1,7 @@
 ---
 title: "Effect 服务与 Layer：把依赖写进类型里"
 description: "用 Effect v4 的 Context.Service 与 Layer 做依赖注入：如何定义服务、构造与组合 Layer、写测试替身，以及为什么 Effect<A, E, R> 里的 R 参数是一个值得喜欢的设计。"
-date: 2026-10-20
+date: 2026-09-26
 tags: [effect, typescript, dependency-injection]
 category: effect
 ---

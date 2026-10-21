@@ -1,7 +1,7 @@
 ---
 title: "Effect Schema：在系统边界做解码，一份定义多处使用"
 description: "用 Effect v4 的 Schema 在系统边界解码未知数据：定义 Schema、拿到类型化的 SchemaError、累积全部字段错误，并让 TypeScript 类型、编码格式与校验逻辑都来自同一份定义。"
-date: 2026-10-21
+date: 2026-09-28
 tags: [effect, typescript, schema]
 category: effect
 ---

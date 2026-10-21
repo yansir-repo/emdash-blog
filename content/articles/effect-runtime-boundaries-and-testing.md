@@ -1,7 +1,7 @@
 ---
 title: Effect 运行时边界与测试：只在入口 run，用 TestClock 测时间
 description: Effect 程序只应在入口被运行：Node 用 runMain，长驻服务用 ManagedRuntime，Workers 按请求提供 Layer。再讲 @effect/vitest、TestClock 与内置的 tracing。
-date: 2026-10-22
+date: 2026-10-02
 tags: [effect, typescript, testing]
 category: effect
 ---

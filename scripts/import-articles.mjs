@@ -37,8 +37,21 @@ for (const [taxonomy, terms] of Object.entries(wanted)) {
 	for (const { slug, label } of terms) if (!have.has(slug)) await client.createTerm(taxonomy, { slug, label });
 }
 
+const publish = (id, date) =>
+	client.request("POST", `/content/articles/${encodeURIComponent(id)}/publish`, { publishedAt: `${date}T00:00:00Z` });
+
+// existing articles: only the publish date is synced from frontmatter (body edits made in the admin are never overwritten)
 const existing = new Set();
-for await (const item of client.listAll("articles")) existing.add(item.slug);
+const dates = new Map(articles.map((a) => [a.slug, a.meta.date]));
+let redated = 0;
+for await (const item of client.listAll("articles")) {
+	existing.add(item.slug);
+	const date = dates.get(item.slug);
+	if (date && item.status === "published" && !item.publishedAt?.startsWith(date)) {
+		await publish(item.id, date);
+		redated++;
+	}
+}
 
 let created = 0;
 for (const [i, a] of articles.entries()) {
@@ -50,9 +63,7 @@ for (const [i, a] of articles.entries()) {
 		bylines: [{ bylineId }],
 		taxonomies: { category: [a.meta.category], tag: a.meta.tags ?? [] },
 	});
-	await client.request("POST", `/content/articles/${encodeURIComponent(item.id)}/publish`, {
-		publishedAt: `${a.meta.date}T00:00:00Z`,
-	});
+	await publish(item.id, a.meta.date);
 	created++;
 }
-console.log(`imported ${created}/${articles.length} articles (${articles.length - created} already present)`);
+console.log(`imported ${created}/${articles.length} articles (${articles.length - created} already present, ${redated} re-dated)`);

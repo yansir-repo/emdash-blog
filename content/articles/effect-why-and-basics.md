@@ -1,7 +1,7 @@
 ---
 title: 为什么我用 Effect：从 Effect<A, E, R> 到 Effect.gen
 description: 用 async/await 写 TypeScript 时，错误和依赖都藏在类型之外。本文从 Effect<A, E, R> 三个类型参数和 Effect.gen 讲起，说明 Effect v4 到底改变了什么。
-date: 2026-10-16
+date: 2026-09-22
 tags: [effect, typescript]
 category: effect
 ---

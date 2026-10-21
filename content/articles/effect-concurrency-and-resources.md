@@ -1,7 +1,7 @@
 ---
 title: Effect 并发与资源管理：Fiber、Scope 与中断保证清理
 description: 从 Fiber 和 Effect.all/forEach 的并发选项讲到 Scope、acquireRelease，再到中断如何保证清理一定执行。所有代码在 Effect v4 下通过 strict 编译，并标出与 v3 的命名差异。
-date: 2026-10-21
+date: 2026-09-30
 tags: [effect, typescript, concurrency]
 category: effect
 ---

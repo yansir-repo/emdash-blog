@@ -22,10 +22,6 @@ export default defineConfig({
 	output: "server",
 	adapter: cloudflare(),
 	site: "https://www.xunpanziyou.com",
-	image: {
-		layout: "constrained",
-		responsiveStyles: true,
-	},
 	redirects: {
 		...legacyRedirects,
 		"/specs101": {

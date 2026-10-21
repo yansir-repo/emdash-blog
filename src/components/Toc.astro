@@ -1,0 +1,24 @@
+---
+import type { Heading } from "../lib/headings";
+
+interface Props {
+	headings: Heading[];
+}
+const { headings } = Astro.props;
+const marker = (depth: number) => (depth === 2 ? "##" : "###");
+---
+
+<nav class="toc not-prose bg-zinc-50 p-6 font-medium dark:bg-zinc-900">
+	<ul class="space-y-3">
+		{
+			headings.map((h) => (
+				<li>
+					<a href={`#${h.id}`} class="group flex items-center hover:text-zinc-600">
+						<span class="mr-2 text-sm text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">{marker(h.depth)}</span>
+						<span class="text-zinc-700 group-hover:text-zinc-900 dark:text-zinc-300 dark:group-hover:text-zinc-100">{h.text}</span>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</nav>

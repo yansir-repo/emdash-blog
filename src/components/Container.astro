@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+	inner?: HTMLAttributes<"div">["class"];
+}
+const { class: className, inner, ...rest } = Astro.props;
+---
+
+<div class:list={["sm:px-8", className]} {...rest}>
+	<div class="mx-auto w-full max-w-7xl lg:px-8">
+		<div class:list={["relative px-4 sm:px-8 lg:px-12", inner]}>
+			<div class="mx-auto max-w-2xl lg:max-w-5xl">
+				<slot />
+			</div>
+		</div>
+	</div>
+</div>

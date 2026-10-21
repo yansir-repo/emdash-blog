@@ -1,0 +1,10 @@
+---
+import { Code } from "astro:components";
+
+interface Props {
+	node: { code: string; language?: string };
+}
+const { node } = Astro.props;
+---
+
+<Code code={node.code} lang={node.language ?? "text"} theme="github-dark-default" />

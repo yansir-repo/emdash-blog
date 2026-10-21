@@ -1,0 +1,12 @@
+---
+import { socialIcons, type SocialIconName } from "../consts/social-icons";
+
+interface Props {
+	name: SocialIconName;
+	class?: string;
+}
+const { name, class: className } = Astro.props;
+const icon = socialIcons[name];
+---
+
+<svg viewBox={icon.viewBox} class={className} aria-hidden="true" set:html={icon.body} />

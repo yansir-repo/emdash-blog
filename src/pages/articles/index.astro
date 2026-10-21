@@ -1,0 +1,26 @@
+---
+import { getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+import SimpleLayout from "../../components/SimpleLayout.astro";
+import ArticleCard from "../../components/ArticleCard.astro";
+
+const { entries, cacheHint } = await getEmDashCollection("articles", { orderBy: { published_at: "desc" } });
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+---
+
+<Base title="知识库" description="询盘自由网知识库：建站、SEO、网络营销，以及 Effect 使用经验。">
+	<SimpleLayout
+		title="知识合集"
+		intro="哈喽，我是颜sir，询盘自由网背后的人。做网络营销快6年，运气不错，实现了财务自由，目前全职在家钻研更多赚钱方法。在钻研过程中，我发现网上几乎找不到优质的中文资源。我深知新手入门需经历痛苦挣扎，所以创建了询盘自由网，把我知道的分享给你。"
+	>
+		<div class="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+			<div class="flex max-w-3xl flex-col space-y-16">
+				{
+					entries.map((a) => (
+						<ArticleCard layout="list" href={`/articles/${a.id}`} title={a.data.title} description={a.data.excerpt} date={a.data.publishedAt!} />
+					))
+				}
+			</div>
+		</div>
+	</SimpleLayout>
+</Base>

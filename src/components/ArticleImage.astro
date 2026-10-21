@@ -1,0 +1,8 @@
+---
+interface Props {
+	node: { alt?: string; asset: { url?: string } };
+}
+const { node } = Astro.props;
+---
+
+{node.asset.url && <img src={node.asset.url} alt={node.alt ?? ""} loading="lazy" decoding="async" />}

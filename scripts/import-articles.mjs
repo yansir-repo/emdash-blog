@@ -1,0 +1,58 @@
+// Idempotent import of content/articles/*.md into a running EmDash instance over its REST API.
+// Needed for remote sites: the setup wizard applies the seed's schema/menus but not its sample content.
+// Usage: node scripts/import-articles.mjs <baseUrl>
+//   auth: EMDASH_TOKEN, else the token saved by `npx emdash login --url <baseUrl>`.
+import { readFileSync } from "node:fs";
+import { homedir } from "node:os";
+import { EmDashClient } from "emdash/client";
+import { markdownToPortableText } from "./lib/md-to-pt.mjs";
+import { readArticles } from "./lib/articles.mjs";
+
+const baseUrl = process.argv[2];
+if (!baseUrl) throw new Error("usage: import-articles.mjs <baseUrl>");
+const token =
+	process.env.EMDASH_TOKEN ??
+	JSON.parse(readFileSync(`${homedir()}/.config/emdash/auth.json`, "utf8"))[baseUrl.replace(/\/$/, "")]?.accessToken;
+if (!token) throw new Error(`no token for ${baseUrl}: run \`npx emdash login --url ${baseUrl}\``);
+
+const client = new EmDashClient({ baseUrl, token });
+const schema = JSON.parse(readFileSync(new URL("../seed/schema.json", import.meta.url), "utf8"));
+const articles = readArticles();
+
+// byline
+const byline = schema.bylines[0];
+const unwrap = (r) => r?.data ?? r;
+const existingBylines = unwrap(await client.request("GET", "/admin/bylines"))?.items ?? [];
+const bylineId =
+	existingBylines.find((b) => b.slug === byline.slug)?.id ??
+	unwrap(await client.request("POST", "/admin/bylines", { slug: byline.slug, displayName: byline.displayName })).id;
+
+// taxonomy terms: the schema's categories plus every tag used by an article (sample-data terms aren't seeded remotely)
+const wanted = {
+	category: schema.taxonomies.find((t) => t.name === "category").terms,
+	tag: [...new Set(articles.flatMap((a) => a.meta.tags ?? []))].map((slug) => ({ slug, label: slug })),
+};
+for (const [taxonomy, terms] of Object.entries(wanted)) {
+	const have = new Set((await client.terms(taxonomy, { limit: 200 })).items.map((t) => t.slug));
+	for (const { slug, label } of terms) if (!have.has(slug)) await client.createTerm(taxonomy, { slug, label });
+}
+
+const existing = new Set();
+for await (const item of client.listAll("articles")) existing.add(item.slug);
+
+let created = 0;
+for (const [i, a] of articles.entries()) {
+	if (existing.has(a.slug)) continue;
+	const item = await client.create("articles", {
+		slug: a.slug,
+		status: "draft",
+		data: { title: a.meta.title, excerpt: a.meta.description, content: markdownToPortableText(a.body, `a${i}k`) },
+		bylines: [{ bylineId }],
+		taxonomies: { category: [a.meta.category], tag: a.meta.tags ?? [] },
+	});
+	await client.request("POST", `/content/articles/${encodeURIComponent(item.id)}/publish`, {
+		publishedAt: `${a.meta.date}T00:00:00Z`,
+	});
+	created++;
+}
+console.log(`imported ${created}/${articles.length} articles (${articles.length - created} already present)`);

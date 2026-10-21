@@ -41,8 +41,15 @@ npx wrangler secret put EMDASH_ENCRYPTION_KEY
 pnpm deploy
 ```
 
-首次访问 `/_emdash/admin` 走 setup 向导创建 owner（passkey）。导入文章：向导/seed 之后用 owner 生成 API token，
-`EMDASH_TOKEN=<token> node scripts/backdate.mjs https://你的域名`。详见 [EmDash 部署文档](https://docs.emdashcms.com/deployment/cloudflare/)。
+首次访问 `/_emdash/admin` 走 setup 向导创建 owner（passkey）。向导只应用 seed 的结构（collection/菜单），不会导入文章，
+所以再执行：
+
+```bash
+npx emdash login --url https://你的域名          # 设备码授权，token 存在 ~/.config/emdash
+node scripts/import-articles.mjs https://你的域名  # 幂等：建 byline/分类/标签，创建并以 frontmatter.date 发布文章
+```
+
+详见 [EmDash 部署文档](https://docs.emdashcms.com/deployment/cloudflare/)。`backdate.mjs` 仅用于本地 seed 后修正日期。
 
 ## 与原站的差异
 

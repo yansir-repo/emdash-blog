@@ -19,3 +19,4 @@ observability: 可观测性
 cloudflare: Cloudflare
 storage: 存储
 coordination: 状态与协调
+workers: Workers

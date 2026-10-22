@@ -50,7 +50,7 @@
   rule: { all: [tools] }
 - slug: cloudflare-tutorial
   title: Cloudflare 教程
-  description: 从存储选型到状态与协调：KV、D1、R2、Durable Objects、Queues、Workflows 的模型、边界与取舍。
+  description: 从 Workers 运行模型、绑定与部署起步，到存储选型与状态协调：KV、D1、R2、Durable Objects、Queues、Workflows 的模型、边界与取舍。
   rule: { all: [cloudflare, tutorial] }
   sort: chapter
   menu: true

@@ -1,5 +1,8 @@
 ---
 import { Code } from "astro:components";
+import type { ComponentProps } from "astro/types";
+
+type Lang = ComponentProps<typeof Code>["lang"];
 
 interface Props {
 	node: { code: string; language?: string };
@@ -7,4 +10,4 @@ interface Props {
 const { node } = Astro.props;
 ---
 
-<Code code={node.code} lang={node.language ?? "text"} theme="github-dark-default" />
+<Code code={node.code} lang={(node.language ?? "text") as Lang} theme="github-dark-default" />

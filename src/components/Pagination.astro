@@ -1,0 +1,61 @@
+---
+interface Props {
+	page: number;
+	totalPages: number;
+	/** Path of page 1; later pages append `?page=N`. */
+	basePath: string;
+}
+const { page, totalPages, basePath } = Astro.props;
+const href = (n: number) => (n === 1 ? basePath : `${basePath}?page=${n}`);
+// 1 … (page-1) page (page+1) … last
+const items = [...new Set([1, page - 1, page, page + 1, totalPages])]
+	.filter((n) => n >= 1 && n <= totalPages)
+	.sort((a, b) => a - b);
+const arrow = "flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0";
+const num = "flex h-10 min-w-10 items-center justify-center rounded-full px-3 text-sm font-medium transition";
+---
+
+{
+	totalPages > 1 && (
+		<nav aria-label="分页" class="mt-16 flex items-center justify-center gap-2">
+			{page > 1 ? (
+				<a href={href(page - 1)} rel="prev" aria-label="上一页" class:list={[arrow, "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"]}>
+					<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="h-4 w-4 stroke-current">
+						<path d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</a>
+			) : (
+				<span class:list={[arrow, "opacity-40"]} aria-hidden="true">
+					<svg viewBox="0 0 16 16" fill="none" class="h-4 w-4 stroke-zinc-500">
+						<path d="M7.25 11.25 3.75 8m0 0 3.5-3.25M3.75 8h8.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</span>
+			)}
+			{items.map((n, i) => (
+				<>
+					{i > 0 && n - items[i - 1]! > 1 && <span class="px-1 text-zinc-400 dark:text-zinc-500" aria-hidden="true">…</span>}
+					<a
+						href={href(n)}
+						aria-current={n === page ? "page" : undefined}
+						class:list={[num, n === page ? "bg-zinc-800 text-zinc-100 dark:bg-zinc-700" : "text-zinc-600 hover:text-indigo-500 dark:text-zinc-400 dark:hover:text-indigo-400"]}
+					>
+						{n}
+					</a>
+				</>
+			))}
+			{page < totalPages ? (
+				<a href={href(page + 1)} rel="next" aria-label="下一页" class:list={[arrow, "text-zinc-500 hover:text-zinc-700 dark:text-zinc-400"]}>
+					<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" class="h-4 w-4 stroke-current">
+						<path d="M8.75 4.75 12.25 8m0 0-3.5 3.25M12.25 8h-8.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</a>
+			) : (
+				<span class:list={[arrow, "opacity-40"]} aria-hidden="true">
+					<svg viewBox="0 0 16 16" fill="none" class="h-4 w-4 stroke-zinc-500">
+						<path d="M8.75 4.75 12.25 8m0 0-3.5 3.25M12.25 8h-8.5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</span>
+			)}
+		</nav>
+	)
+}

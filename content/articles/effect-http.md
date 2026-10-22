@@ -2,8 +2,8 @@
 title: "Effect 的 HTTP：把状态码、超时和运行时差异都写进类型"
 description: 用 effect/http 的 HttpClient 把传输、状态码、解码与超时放进错误通道，用 HttpApi 一份定义同时得到服务端、客户端和文档，再用 toWebHandler 接到 Workers 这类 fetch 运行时。
 date: 2026-10-08
-tags: [effect, http, httpapi, cloudflare-workers]
 category: effect
+tags: [effect, guide]
 ---
 
 前面几篇讲的都是进程内的东西：错误、服务、Layer、边界解码、并发。HTTP 是这些东西第一次真正碰到外部世界的地方，也是「失败」最丰富的地方：连不上、超时、返回 503、返回 200 但 body 不对、路径参数是 `abc`。这一篇我想回答一个问题：怎么让这些失败都出现在类型里，而不是散落在 `try/catch` 和 `res.ok` 判断里。

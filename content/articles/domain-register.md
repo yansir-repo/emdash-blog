@@ -5,7 +5,7 @@ date: 2020-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /domain-register
-tags: []
+tags: [domain]
 ---
 
 搞懂域名大概意思后，第一个实际问题就是到哪里注册域名。

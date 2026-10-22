@@ -5,7 +5,7 @@ date: 2020-08-13
 author: 颜sir
 category: marketing
 redirectFrom: /seo-vs-ads
-tags: []
+tags: [seo, ads]
 ---
 
 我刚开始做外贸推广时，经常在SEO和付费广告之间难以抉择，对当时的我来讲，要做个取舍实在太难。

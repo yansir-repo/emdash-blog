@@ -2,8 +2,8 @@
 title: "Effect 原生属性测试：Arbitrary、it.effect.prop 与 TestSchema"
 description: "Effect v4 内置基于 Schema 的属性测试：Arbitrary 派生生成器，checkEffect 提供可复现 seed 与结构化 shrinking，配合 it.prop 与 TestSchema，无需 fast-check。"
 date: 2026-10-22
-tags: [effect, effect-advanced, testing, property-testing, schema]
 category: effect
+tags: [effect, advanced, testing]
 ---
 
 example-based 测试写的是「我想到的几个输入」，属性测试写的是「对所有合法输入都成立的规律」，由框架生成几百个输入去找反例，找到之后再缩小成最小的失败案例。这种方式特别适合有明确代数性质的代码：编码再解码应当还原、合并操作应当满足交换律、状态转换不应当产生非法状态。

@@ -6,7 +6,7 @@ date: 2020-08-08
 author: 颜sir
 category: marketing
 redirectFrom: /why-seo-dead
-tags: []
+tags: [seo]
 ---
 
 我从一开始就很讨厌“SEO”这个叫法，原因很简单，因为它是由“search engine optimization”缩写而成，也就是围绕谷歌、必应、百度等搜索引擎来做优化。

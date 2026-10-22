@@ -5,7 +5,7 @@ date: 2022-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /just-my-socks
-tags: []
+tags: [tools]
 ---
 
 注意：文章里面有几张图挂掉了，我知道需要更新……但最近计划把网站搬迁到国内，这篇文章案例说要删掉才对，不然没法通过审核。

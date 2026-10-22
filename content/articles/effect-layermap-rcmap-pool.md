@@ -2,8 +2,8 @@
 title: "Effect 资源类 API：LayerMap、RcMap、Pool、LayerRef 与 Resource 怎么选"
 description: 按「有没有 key、要不要共享、要不要刷新」梳理 Effect 4.0.5 的五个资源 API：LayerMap 做多租户 Layer 缓存，RcMap 按 key 共享，Pool 做连接池，LayerRef 与 Resource 负责刷新，并标明稳定性。
 date: 2026-10-22
-tags: [effect, effect-advanced, layermap, rcmap, pool, resource]
 category: effect
+tags: [effect, advanced]
 ---
 
 [并发与资源](/articles/effect-concurrency-and-resources)那篇讲了 `Scope` 和 `acquireRelease`：一个资源，一个生命周期。真实系统里很快会遇到三种变形：资源按 key 区分（每个租户一个连接）、资源需要复用而不是每次新建（连接池）、资源会过期需要刷新（token、配置快照）。Effect 为这三种变形各给了一个原语，名字很像，边界很清楚。

@@ -1,19 +1,11 @@
 ---
 import Base from "../../layouts/Base.astro";
 import SimpleLayout from "../../components/SimpleLayout.astro";
-import ArticleCard from "../../components/ArticleCard.astro";
-import Pagination from "../../components/Pagination.astro";
-import { paginateArticles } from "../../lib/paginate";
+import ArticleList from "../../components/ArticleList.astro";
+import { articles, pageFromUrl } from "../../lib/site-index";
 
-const PER_PAGE = 20;
-const requested = Number.parseInt(Astro.url.searchParams.get("page") ?? "1", 10);
-const { entries, page, totalPages, cacheHints } = await paginateArticles(Number.isFinite(requested) ? requested : 1, PER_PAGE);
-if (Astro.cache?.enabled) for (const hint of cacheHints) Astro.cache.set(hint);
-
-// ?page=N out of range or malformed -> canonical URL of the clamped page
-if (Astro.url.searchParams.has("page") && String(page) !== Astro.url.searchParams.get("page")) {
-	return Astro.redirect(page === 1 ? "/articles" : `/articles?page=${page}`, 301);
-}
+const { items, page, totalPages, redirect } = pageFromUrl(Astro.url, articles);
+if (redirect) return Astro.redirect(redirect, 301);
 ---
 
 <Base title={page > 1 ? `知识库 第 ${page} 页` : "知识库"} description="询盘自由网知识库：建站、SEO、网络营销，以及 Effect 使用经验。">
@@ -21,15 +13,6 @@ if (Astro.url.searchParams.has("page") && String(page) !== Astro.url.searchParam
 		title="知识合集"
 		intro="哈喽，我是颜sir，询盘自由网背后的人。做网络营销快6年，运气不错，实现了财务自由，目前全职在家钻研更多赚钱方法。在钻研过程中，我发现网上几乎找不到优质的中文资源。我深知新手入门需经历痛苦挣扎，所以创建了询盘自由网，把我知道的分享给你。"
 	>
-		<div class="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
-			<div class="flex max-w-3xl flex-col space-y-16">
-				{
-					entries.map((a) => (
-						<ArticleCard layout="list" href={`/articles/${a.id}`} title={a.data.title} description={a.data.excerpt} date={a.data.publishedAt!} />
-					))
-				}
-			</div>
-		</div>
-		<Pagination page={page} totalPages={totalPages} basePath="/articles" />
+		<ArticleList items={items} page={page} totalPages={totalPages} basePath="/articles" />
 	</SimpleLayout>
 </Base>

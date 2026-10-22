@@ -2,8 +2,8 @@
 title: "Effect ErrorReporter：统一上报 Cause，用标注控制 ignore、severity 与 attributes"
 description: 讲解 ErrorReporter 与 withErrorReporting：用 ignore、severity、attributes 标注错误统一上报 Cause，defectsOnly 的真实语义与默认 Info 陷阱，unstable。
 date: 2026-10-22
-tags: [effect, effect-advanced, error-handling, error-reporter]
 category: effect
+tags: [effect, advanced, errors]
 ---
 
 错误上报在大多数项目里是一堆散落的 `catch`：每个边界各写一遍 `logger.error`，各自决定哪些错误不用报，各自拼上下文。Effect 4 给了一个集中的答案：`ErrorReporter`。它把「怎么上报」放进环境里，把「这个错误要不要报、多严重、带什么上下文」放在错误类型自己身上。

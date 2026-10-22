@@ -2,8 +2,8 @@
 title: "Effect 重试与 Schedule：退避、抖动、repeat、超时与限流"
 description: 把重试、轮询、定时任务统一成 Schedule 策略值：怎么组合退避、上限与抖动，哪些错误该重试，以及 repeat、timeout、cron 和限流的边界。
 date: 2026-10-06
-tags: [effect, typescript, schedule, retry, resilience]
 category: effect
+tags: [effect, guide]
 ---
 
 重试是最容易写错的代码之一。手写 `while` 循环加 `setTimeout`，一不小心就是无上限、无退避、对所有错误一视同仁，还没法测。Effect 的做法是把「什么时候再来一次、间隔多久、什么时候放弃」抽成一个值：`Schedule`。同一个值可以喂给 `Effect.retry`、`Effect.repeat`、`Stream.retry`，它们只是消费方。

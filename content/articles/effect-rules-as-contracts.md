@@ -2,8 +2,8 @@
 title: 把 Effect 约定变成机器可检查的规则：language service 与 effect-scan
 description: 约定写在文档里会过期。用 @effect/language-service 查类型层，用 effect-scan 与 rules.json 查语法层：一个规则一个 owner、合同与生成物分离、信号与阻断分开。
 date: 2026-10-22
-tags: [effect, tooling, lint, language-service, contracts]
 category: effect
+tags: [effect, guide]
 ---
 
 写 Effect 久了，会积累一批约定：不要在业务代码里写 `try/catch`，`Effect.run*` 只出现在入口，不要直接读 `process.env`，每个 Effect 都要被 `yield*` 或返回。这些约定一开始都写在文档里，然后慢慢变成「大家应该知道」，再然后在某次重构里被悄悄违反。

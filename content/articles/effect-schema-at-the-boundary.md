@@ -2,8 +2,8 @@
 title: "Effect Schema：在系统边界做解码，一份定义多处使用"
 description: "用 Effect v4 的 Schema 在系统边界解码未知数据：定义 Schema、拿到类型化的 SchemaError、累积全部字段错误，并让 TypeScript 类型、编码格式与校验逻辑都来自同一份定义。"
 date: 2026-09-28
-tags: [effect, typescript, schema]
 category: effect
+tags: [effect, guide, schema]
 ---
 
 TypeScript 的类型在运行时不存在。`JSON.parse` 返回的是 `any`，`req.body` 是 `unknown`，环境变量是 `string | undefined`。很多项目的"类型安全"其实停在边界之内：边界上一句 `as User`，之后所有代码都在相信一个没人验证过的谎言。

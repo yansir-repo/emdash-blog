@@ -38,16 +38,6 @@
 					"type": "text"
 				},
 				{
-					"slug": "series",
-					"label": "系列",
-					"type": "string"
-				},
-				{
-					"slug": "series_order",
-					"label": "系列序号",
-					"type": "integer"
-				},
-				{
 					"slug": "content",
 					"label": "正文",
 					"type": "portableText",
@@ -108,11 +98,6 @@
 					"type": "custom",
 					"label": "知识库",
 					"url": "/articles"
-				},
-				{
-					"type": "custom",
-					"label": "Effect 教程",
-					"url": "/series/effect-tutorial"
 				},
 				{
 					"type": "custom",

@@ -12,12 +12,16 @@
 | 联盟链接 | `src/consts/affiliates.ts` |
 | 旧路径 301（`redirectFrom`）、`/specs101`、`/vip` | `astro.config.mjs` ← 文章 frontmatter |
 
-`seed/seed.json` 是 `scripts/build-seed.mjs` 生成物（已 gitignore，`dev`/`build` 前自动生成）：Markdown → Portable Text。
+`seed/seed.json` 与 `src/generated/site-index.json` 是 `scripts/build-seed.mjs` 生成物（已 gitignore，`dev`/`build` 前自动生成）：Markdown → Portable Text。
 只支持标题、段落、列表、引用、代码块、图片、表格、链接/粗斜体/行内代码；遇到其他语法会直接报错而不是静默渲染错。
 
-系列：frontmatter 里写 `series: <slug>` 与 `seriesOrder: <整数>`（需同时出现），系列标题在 `src/consts/series.ts`，目录页 `/series/<slug>`，文章页底部自动出现上一章/下一章。
+标签与合集：
+- `content/tags.yaml` 是唯一的标签词表；每篇文章最多 3 个标签，且必须在词表内（否则构建失败）。
+- `content/collections.yaml` 定义合集：一条规则（`all` 交集 / `any` 并集 / `none` 排除，作用在标签上），`sort: chapter` 的合集按 `chapter` 排序并在文章页底部生成上一章/下一章；`menu: true` 进「知识库」下拉，`featured: true` 上首页。
+- 页面：`/collections/<slug>`、`/tags/<slug>`、`/articles`（均每页 20 篇，`?page=N`）。
+- 列表类页面读 `src/generated/site-index.json`（构建时由 frontmatter 生成，不含正文、不查库）；文章详情页读 CMS。因此只在后台新建的文章不会出现在列表里；若要采用后台写作流，需把 `src/lib/site-index.ts` 改为基于 CMS 的 `cachedQuery`。
 
-文章 frontmatter：`title`、`description`（作为摘要）、`date`（`YYYY-MM-DD`，真实发布日期）、`category`（`marketing` | `effect`）、`tags`、可选 `redirectFrom`。
+文章 frontmatter：`title`、`description`（作为摘要）、`date`（`YYYY-MM-DD`，真实发布日期）、`category`（`marketing` | `effect`）、`tags`（≤3 个）、可选 `chapter`（整数，顺序合集用）、`redirectFrom`。
 
 ## 本地开发
 

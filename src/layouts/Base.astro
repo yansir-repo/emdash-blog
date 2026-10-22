@@ -4,6 +4,7 @@ import { EmDashHead, EmDashBodyStart, EmDashBodyEnd } from "emdash/ui";
 import { createPublicPageContext } from "emdash/page";
 import { Image } from "astro:assets";
 import Container from "../components/Container.astro";
+import { collections } from "../lib/site-index";
 import avatar from "../assets/avatar.png";
 import "../styles/global.css";
 
@@ -51,6 +52,9 @@ const isHome = path === "/";
 const isActive = (url: string) => url.startsWith("/") && (url.replace(/\/$/, "") || "/") === path;
 const linkAttrs = (target?: string | null) => (target === "_blank" ? { target: "_blank", rel: "noopener" } : {});
 const year = new Date().getFullYear();
+// 知识库 nav item carries a dropdown of the collections flagged `menu: true`
+const KNOWLEDGE_URL = "/articles";
+const dropdown = collections.filter((c) => c.menu);
 
 const glass =
 	"bg-white/90 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:ring-white/10";
@@ -137,7 +141,7 @@ const glass =
 										<ul class:list={["flex rounded-full px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200", glass]}>
 											{
 												menuItems.map((item) => (
-													<li>
+													<li class="group relative">
 														<a
 															href={item.url}
 															{...linkAttrs(item.target)}
@@ -146,6 +150,23 @@ const glass =
 															{item.label}
 															{isActive(item.url) && <span class="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-indigo-500/0 via-indigo-500/40 to-indigo-500/0 dark:from-indigo-400/0 dark:via-indigo-400/40 dark:to-indigo-400/0" />}
 														</a>
+														{item.url === KNOWLEDGE_URL && dropdown.length > 0 && (
+															<div class="invisible absolute left-1/2 top-full z-50 w-64 -translate-x-1/2 pt-2 opacity-0 transition group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100">
+																<ul class="rounded-2xl bg-white p-2 text-sm font-medium shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:bg-zinc-800 dark:ring-white/10">
+																	{dropdown.map((c) => (
+																		<li>
+																			<a href={`/collections/${c.slug}`} class="flex items-baseline justify-between gap-3 rounded-xl px-3 py-2 text-zinc-800 transition hover:bg-zinc-50 hover:text-indigo-500 dark:text-zinc-200 dark:hover:bg-zinc-700/50 dark:hover:text-indigo-400">
+																				<span>{c.title}</span>
+																				<span class="text-xs font-normal text-zinc-400 dark:text-zinc-500">{c.members.length}</span>
+																			</a>
+																		</li>
+																	))}
+																	<li class="mt-1 border-t border-zinc-100 pt-1 dark:border-zinc-700/40">
+																		<a href={KNOWLEDGE_URL} class="block rounded-xl px-3 py-2 text-zinc-500 transition hover:bg-zinc-50 hover:text-indigo-500 dark:text-zinc-400 dark:hover:bg-zinc-700/50 dark:hover:text-indigo-400">全部文章 →</a>
+																	</li>
+																</ul>
+															</div>
+														)}
 													</li>
 												))
 											}
@@ -183,7 +204,18 @@ const glass =
 					</div>
 					<nav class="mt-6">
 						<ul class="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
-							{menuItems.map((item) => <li><a href={item.url} {...linkAttrs(item.target)} class="block py-2">{item.label}</a></li>)}
+							{
+								menuItems.map((item) => (
+									<li>
+										<a href={item.url} {...linkAttrs(item.target)} class="block py-2">{item.label}</a>
+										{item.url === KNOWLEDGE_URL && dropdown.length > 0 && (
+											<ul class="mb-2 ml-4 border-l border-zinc-100 pl-4 text-sm text-zinc-600 dark:border-zinc-700/40 dark:text-zinc-400">
+												{dropdown.map((c) => <li><a href={`/collections/${c.slug}`} class="block py-1.5">{c.title}</a></li>)}
+											</ul>
+										)}
+									</li>
+								))
+							}
 						</ul>
 					</nav>
 				</div>

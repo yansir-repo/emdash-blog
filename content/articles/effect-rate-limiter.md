@@ -2,8 +2,8 @@
 title: "Effect RateLimiter：按 key 限速，以及 Semaphore、Schedule、PartitionedSemaphore、Latch 的分工"
 description: 讲清 RateLimiter 的两种算法、delay 与 fail、内存与 Redis store，对比 Semaphore 和 Schedule，并介绍 PartitionedSemaphore 与 Latch 的用法。
 date: 2026-10-22
-tags: [effect, effect-advanced, rate-limiter, semaphore, latch]
 category: effect
+tags: [effect, advanced, concurrency]
 ---
 
 「限流」这个词在代码里至少指三件不同的事：同时最多几个在跑（并发上限）、单位时间最多放行几个（速率上限）、一个循环每隔多久跑一次（节拍）。Effect 里这三件事分别由不同的工具承担，混用最常见的后果是：想限速却用了信号量，想按用户限流却只有一个全局计数。

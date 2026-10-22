@@ -2,8 +2,8 @@
 title: "Effect 服务与 Layer：把依赖写进类型里"
 description: "用 Effect v4 的 Context.Service 与 Layer 做依赖注入：如何定义服务、构造与组合 Layer、写测试替身，以及为什么 Effect<A, E, R> 里的 R 参数是一个值得喜欢的设计。"
 date: 2026-09-26
-tags: [effect, typescript, dependency-injection]
 category: effect
+tags: [effect, guide]
 ---
 
 大多数 TypeScript 项目做依赖注入，要么靠模块级单例（`import { db } from "./db"`），要么靠 DI 容器加装饰器。前者在测试时只能 mock 模块，后者把依赖关系藏在运行时反射里，写错了要到启动才知道。

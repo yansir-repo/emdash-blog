@@ -5,7 +5,7 @@ date: 2022-09-05
 author: 颜sir
 category: marketing
 redirectFrom: /nitropack
-tags: []
+tags: [wordpress, tools]
 ---
 
 很多不懂技术的朋友想优化网站速度，其实挺头疼的，因为它的过程非常繁琐，繁琐到连懂技术的我，一想到要优化网站速度，心情就和上坟一样。

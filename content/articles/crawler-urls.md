@@ -5,7 +5,7 @@ date: 2022-07-18
 author: 颜sir
 category: marketing
 redirectFrom: /crawler-urls
-tags: []
+tags: [seo]
 ---
 
 做SEO需要批量分析竞争对手的网站，做外贸也要根据某个关键词批量找网址，我来分享一个方法，让你能迅速爬取谷歌搜索结果页上的所有网址。

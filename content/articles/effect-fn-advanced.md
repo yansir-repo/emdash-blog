@@ -2,8 +2,8 @@
 title: "Effect.fn 进阶：span 选项、后处理参数，以及 fnUntraced 与 fnUntracedEager"
 description: 拆开 Effect.fn 的三种形态：span 的 attributes 与 kind、Effect.fn.Return、后处理参数为何取代 .pipe，以及库代码和热路径怎么选 fnUntraced 与 fnUntracedEager。
 date: 2026-10-22
-tags: [effect, effect-advanced, effect-fn, tracing]
 category: effect
+tags: [effect, advanced]
 ---
 
 `Effect.fn` 在基础篇里通常只出现一次：`Effect.fn("name")(function* () {...})`，当作「带名字的 `Effect.gen` 函数」。但它其实有三个互相独立的能力：给函数体生成 span、在失败时补充调用点栈信息、接收一串后处理函数。把这三件事分清楚，你才知道什么时候该用 `Effect.fn`，什么时候该换成 `Effect.fnUntraced`。

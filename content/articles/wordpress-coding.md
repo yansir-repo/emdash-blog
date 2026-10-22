@@ -5,7 +5,7 @@ date: 2020-08-08
 author: 颜sir
 category: marketing
 redirectFrom: /wordpress-coding
-tags: []
+tags: [wordpress]
 ---
 
 我相信很多人和我一样，网站需要定制时，就忍不住借助代码的力量，虽然不常用，但用代码解决问题太香了，不用辛苦找插件。

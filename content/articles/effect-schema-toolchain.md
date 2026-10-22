@@ -2,8 +2,8 @@
 title: "Effect Schema 工具链：一份定义，派生校验、JSON Schema、Diff 与更多"
 description: "Effect v4 的 Schema 一份定义可派生 Standard Schema、JSON 编解码器、JSON Schema、Equivalence、Formatter 与 JSON Patch，并讲清默认值的坑。"
 date: 2026-10-22
-tags: [effect, effect-advanced, schema, json-schema, standard-schema]
 category: effect
+tags: [effect, advanced, schema]
 ---
 
 [上一篇 Schema 的文章](/articles/effect-schema-at-the-boundary)讲的是边界解码：`unknown` 进来，类型化的值出去。这篇讲另一半价值：**一份 Schema 定义，可以机械地派生出一整套周边能力**。

@@ -2,8 +2,8 @@
 title: "Effect fork 家族：forkChild、forkDetach、forkScoped、forkIn 与 startImmediately"
 description: v4 的 fork 系列把子 fiber 挂在哪里、何时被中断，以及 startImmediately 与 uninterruptible 选项。用 PubSub 订阅丢消息复现 fork 后下一个 tick 才执行的竞态，并给出解法。
 date: 2026-10-22
-tags: [effect, effect-advanced, fiber, concurrency]
 category: effect
+tags: [effect, advanced, concurrency]
 ---
 
 fork 是 Effect 里最容易「看起来没问题、偶尔丢数据」的 API。你 fork 了一个消费者，紧接着往队列里发消息，结果消息丢了。排查半天，发现问题不在队列，在于 fork 返回时子 fiber 还没开始执行。v4 给 fork 系列加了两个选项，专门处理这件事。

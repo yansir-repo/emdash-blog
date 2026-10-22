@@ -2,8 +2,8 @@
 title: "Effect 可观测性：Effect.fn 命名、Metric 基数与错误上报的边界"
 description: 可观测性不是多打点，而是决定哪些事实进 span、哪些进日志、哪些进 Metric。本文讲 Effect.fn 命名约定、Metric 的基数纪律、OTLP 导出与 ErrorReporter，并给出可运行的 span 断言写法。
 date: 2026-10-12
-tags: [effect, observability, tracing, metrics]
 category: effect
+tags: [effect, guide, observability]
 ---
 
 上一篇[运行时边界与测试](/articles/effect-runtime-boundaries-and-testing)里，我只用几行代码介绍了 `Effect.withSpan` 和 `Effect.annotateLogs`，证明 tracing 是内置的。这一篇回答更难的问题：**打什么、不打什么、放在哪一层**。

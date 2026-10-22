@@ -5,7 +5,7 @@ date: 2020-07-27
 author: 颜sir
 category: marketing
 redirectFrom: /invalid-click
-tags: []
+tags: [ads]
 ---
 
 很多人投广告广告最大的顾虑是，如果我竞争对手雇人点我广告怎么办？一个关键词点击2美金，让人点1,000次我钱就烧光了。

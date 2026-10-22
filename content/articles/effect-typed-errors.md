@@ -2,8 +2,8 @@
 title: Effect 类型化错误：TaggedError、catchTag 与 failure/defect 之分
 description: 用 Data.TaggedError 把错误写进 Effect 的 E 参数，用 catchTag 精确恢复，再分清预期失败与缺陷 defect。代码均已通过 tsc strict 编译验证。
 date: 2026-09-24
-tags: [effect, typescript, error-handling]
 category: effect
+tags: [effect, guide, errors]
 ---
 
 上一篇说过，`Effect<A, E, R>` 的第二个参数 `E` 是预期内的失败类型。这一篇把 `E` 讲透：怎么定义错误、怎么在类型里看着它传播和收窄、以及 Effect 为什么坚持把「失败」和「缺陷」分成两条通道。

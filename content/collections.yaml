@@ -1,0 +1,50 @@
+# A collection is a rule over article metadata (tags / category), resolved at build time.
+#   rule.all  : article must carry every listed tag      (intersection)
+#   rule.any  : article must carry at least one          (union)
+#   rule.none : article must carry none
+#   sort      : date-desc (default) | chapter (requires every member to have `chapter`; enables prev/next)
+#   menu      : listed in the 知识库 dropdown;  featured: shown on the home page (in file order)
+- slug: effect-tutorial
+  title: Effect 教程：由浅入深
+  description: 从 async/await 的三个盲区出发，逐步讲清类型、错误、依赖、并发、资源与工程化。每章只引入一类新概念。
+  rule: { all: [effect, tutorial] }
+  sort: chapter
+  menu: true
+  featured: true
+- slug: effect-advanced
+  title: Effect 进阶
+  description: 一个特性一篇：catchReason、ExecutionPlan、Tx、Optic、RateLimiter……每个都实测过的 Effect v4 高级用法。
+  rule: { all: [effect, advanced] }
+  menu: true
+  featured: true
+- slug: effect-guides
+  title: Effect 专题指南
+  description: 按主题展开的 Effect 实践：服务与 Layer、Schema、Stream、HTTP、SQL、可观测性、迁移与规则。
+  rule: { all: [effect, guide] }
+  menu: true
+- slug: wordpress
+  title: WordPress 建站
+  description: 选主题、选主机、迁移、提速、避坑，把 WordPress 站点从零搭到能打。
+  rule: { any: [wordpress] }
+  menu: true
+  featured: true
+- slug: seo
+  title: SEO 与内容
+  description: 排名的三个要素、关键词挖掘、内容营销的方向，以及 SEO 到 SIO 的变化。
+  rule: { any: [seo, content] }
+  menu: true
+  featured: true
+- slug: ads-analytics
+  title: 广告与数据
+  description: 付费广告、再营销、无效点击，以及让数据真实可信的 GA 设置。
+  rule: { any: [ads, analytics] }
+  menu: true
+- slug: domain-hosting
+  title: 域名与主机
+  description: 域名怎么选、在哪注册、为什么要握在自己手里，以及哪家主机真的快。
+  rule: { any: [domain, hosting] }
+  menu: true
+- slug: tools
+  title: 严选工具
+  description: 我用过并留下来的工具：主机、加速、SEO 插件、网络方案。
+  rule: { all: [tools] }

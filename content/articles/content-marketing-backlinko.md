@@ -5,7 +5,7 @@ date: 2022-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /content-marketing-backlinko
-tags: []
+tags: [content, seo]
 ---
 
 这篇文章是Brain写的，但因为写得不错，所以拜托Judy翻译了下，文章内容涵盖：

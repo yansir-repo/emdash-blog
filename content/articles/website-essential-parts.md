@@ -5,7 +5,7 @@ date: 2020-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /website-essential-parts
-tags: []
+tags: [wordpress]
 ---
 
 因为WordPress是个建站程序，并不属于任意一个平台，所以，想要搭建WordPress网站，是需要自己购买空间、域名、主题和插件这两样东西的，其中空间、域名是必然的付费项，主题和插件是可选的付费项，因为有很多主题和插件是完全免费的。

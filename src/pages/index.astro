@@ -1,5 +1,4 @@
 ---
-import { getEmDashCollection } from "emdash";
 import { Image } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import Container from "../components/Container.astro";
@@ -7,6 +6,8 @@ import SimpleH2Layout from "../components/SimpleH2Layout.astro";
 import AffCards from "../components/AffCards.astro";
 import ArticleCard from "../components/ArticleCard.astro";
 import Newsletter from "../components/Newsletter.astro";
+import FeaturedCollections from "../components/FeaturedCollections.astro";
+import { articles } from "../lib/site-index";
 import SocialIcon from "../components/SocialIcon.astro";
 import image1 from "../assets/photos/image-1.jpg";
 import image2 from "../assets/photos/image-2.jpg";
@@ -14,11 +15,7 @@ import image3 from "../assets/photos/image-3.jpg";
 import image4 from "../assets/photos/image-4.jpg";
 import image5 from "../assets/photos/image-5.jpg";
 
-const { entries, cacheHint } = await getEmDashCollection("articles", {
-	orderBy: { published_at: "desc" },
-	limit: 4,
-});
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+const latest = articles.slice(0, 4);
 
 const photos = [image1, image2, image3, image4, image5];
 const rotations = ["rotate-2", "-rotate-2", "rotate-2", "rotate-2", "-rotate-2"];
@@ -62,6 +59,10 @@ const social = [
 		</div>
 	</div>
 
+	<SimpleH2Layout title="精选合集" description="按主题把文章串起来：想系统学一件事，从这里挑一条路径走下去。">
+		<FeaturedCollections />
+	</SimpleH2Layout>
+
 	<SimpleH2Layout title="严选工具" description="下面都是我用过的工具，每一个都经过十几轮试错，大浪淘沙剩下来的。">
 		<AffCards />
 	</SimpleH2Layout>
@@ -70,8 +71,8 @@ const social = [
 		<div class="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
 			<div class="flex flex-col gap-16">
 				{
-					entries.map((a) => (
-						<ArticleCard href={`/articles/${a.id}`} title={a.data.title} description={a.data.excerpt} date={a.data.publishedAt!} />
+					latest.map((a) => (
+						<ArticleCard href={`/articles/${a.slug}`} title={a.title} description={a.description} date={a.date} />
 					))
 				}
 			</div>

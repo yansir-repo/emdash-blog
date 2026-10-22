@@ -12,7 +12,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "deploy": "astro build && wrangler deploy",
-    "typecheck": "astro check",
+    "typecheck": "node scripts/build-seed.mjs && astro check",
     "seed:build": "node scripts/build-seed.mjs",
     "predev": "node scripts/build-seed.mjs",
     "prebuild": "node scripts/build-seed.mjs"

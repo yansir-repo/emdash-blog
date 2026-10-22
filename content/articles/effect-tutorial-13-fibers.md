@@ -2,10 +2,9 @@
 title: "Fiber 心智模型：结构化并发"
 description: 用 async/await 的视角理解 fiber：它是什么、为什么子任务必须属于父任务，以及 forkChild、join、interrupt 各自表达的语义。讲清「中断不是失败」与结构化并发的价值。
 date: 2026-10-12
-tags: [effect, tutorial, fiber, concurrency]
 category: effect
-series: effect-tutorial
-seriesOrder: 13
+chapter: 13
+tags: [effect, tutorial, concurrency]
 ---
 
 前面 12 章，我们写的程序基本是「一条线走到底」：一步接一步，每步要么成功要么失败。从这一章开始进入并发。先说好，这一章不讲怎么并发得更快，那是下一章的事。这一章只回答一个更根本的问题：**一个正在运行的 Effect，是什么东西，它归谁管？**

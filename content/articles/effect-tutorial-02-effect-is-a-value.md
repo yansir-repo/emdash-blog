@@ -2,10 +2,9 @@
 title: "Effect 是一个值：描述与执行、惰性、Effect<A, E, R> 怎么读"
 description: 教程第 2 章。理解 Effect 的核心心智模型：它是对计算的描述而不是计算本身，创建不会执行，只有被运行才会产生副作用，并学会流畅地读 Effect<A, E, R> 三个参数。
 date: 2026-10-01
-tags: [effect, tutorial, laziness, type-parameters]
 category: effect
-series: effect-tutorial
-seriesOrder: 2
+chapter: 2
+tags: [effect, tutorial]
 ---
 
 上一章说 Effect 把失败、依赖、取消写进了类型。这一章回答一个更根本的问题：Effect 到底是什么东西？答案很短：**它是一个值，一份「要做什么」的描述，而不是「正在做」的过程。**

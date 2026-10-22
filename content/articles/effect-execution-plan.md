@@ -2,8 +2,8 @@
 title: "Effect ExecutionPlan：把多供应商 fallback 写成一个有序降级链"
 description: ExecutionPlan 把「先试 A，重试两次，不行换 B，最后本地兜底」写成一个值：每步提供不同的 Layer，可配 attempts、schedule、while，用 onEvent 观察。unstable 特性，附流式场景的坑。
 date: 2026-10-22
-tags: [effect, effect-advanced, execution-plan, fallback, resilience]
 category: effect
+tags: [effect, advanced]
 ---
 
 调用大模型 API 的时候，几乎所有人都会写出同一段代码：先打 OpenAI，失败了重试两次，还不行就换 Anthropic，再不行退回本地小模型。常见写法是嵌套的 `catch` 夹着 `retry`，每层手工 `provide` 一个 client。能跑，但降级顺序藏在嵌套里，「哪个错误重试、哪个直接换家」的判断散落各处，想知道最后是谁答的还得到处打日志。

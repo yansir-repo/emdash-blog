@@ -2,10 +2,9 @@
 title: "与外部世界对话：HttpClient、SQL、RPC 的共同形状"
 description: HTTP、数据库、RPC 看似三个领域，其实都是跨进程边界的调用，面对同样的问题。本章讲它们共享的形状，以及 HttpClient、SqlClient、Rpc 怎样落在这个形状上。
 date: 2026-10-20
-tags: [effect, tutorial, http, sql, rpc, boundary]
 category: effect
-series: effect-tutorial
-seriesOrder: 21
+chapter: 21
+tags: [effect, tutorial]
 ---
 
 前面 20 章讲的东西，大多发生在进程内部。这一章讲程序和外部世界对话的时候：调用别的服务的 HTTP 接口，查数据库，或者调用另一个服务的 RPC。

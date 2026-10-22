@@ -2,10 +2,9 @@
 title: "错误处理的设计：谁处理、在哪翻译、重试前先分类"
 description: 有了类型化错误之后，真正的问题是设计：错误该由哪一层处理，底层错误在哪里翻译成领域错误，以及为什么重试之前必须先给错误分类。
 date: 2026-10-05
-tags: [effect, tutorial, errors, design]
 category: effect
-series: effect-tutorial
-seriesOrder: 6
+chapter: 6
+tags: [effect, tutorial, errors]
 ---
 
 上一章教了工具：`fail`、`TaggedError`、`catchTag`。工具到手之后，新的问题出现了：**错误应该由谁处理？在哪里翻译？每个函数都写一个错误类吗？失败了就重试行不行？** 这些不是语法问题，是设计问题。这一章给出一套判断方法。

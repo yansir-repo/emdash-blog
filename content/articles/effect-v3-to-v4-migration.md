@@ -2,8 +2,8 @@
 title: Effect v3 到 v4 迁移实录：改名清单与会咬人的行为差异
 description: 在 effect 4.0.5 上逐条验证的 v3 到 v4 迁移清单：catchAll、Either、Effect.Service、fork 等改名，以及 runPromise 拒绝值等行为差异。
 date: 2026-10-20
-tags: [effect, migration, typescript, v4]
 category: effect
+tags: [effect, guide]
 ---
 
 这篇不是迁移指南的转述，而是一份核对记录。我在同一台机器上装了 `effect@3.22.3` 和 `effect@4.0.5`，每一条结论都在 4.0.5 上验证过，凡是涉及「v3 里是什么样」的地方，再用 3.22.3 对照确认一遍。凡是文中说「不存在」的 API，都是用 `tsc` 的 `@ts-expect-error` 或运行时检查证实过的，不是凭记忆。

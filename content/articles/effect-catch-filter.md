@@ -2,8 +2,8 @@
 title: "Effect catchFilter 与 Filter：可组合的错误匹配与提取"
 description: 讲清 Effect.catchFilter 与 Filter 模块：用可组合的 Filter 同时完成匹配与提取，保留未命中错误，并对比 catchTag、catchIf，附带 fromPredicate 收窄类型与实际不符的坑。
 date: 2026-10-22
-tags: [effect, effect-advanced, error-handling, filter]
 category: effect
+tags: [effect, advanced, errors]
 ---
 
 上一篇讲了 [catchReason](/articles/effect-catch-reason)，它解决的是「父错误加嵌套 reason」这一种固定形状。这一篇讲更一般的工具：`Effect.catchFilter` 与 `Filter` 模块。

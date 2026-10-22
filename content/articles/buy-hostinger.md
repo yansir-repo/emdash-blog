@@ -5,7 +5,7 @@ date: 2022-07-22
 author: 颜sir
 category: marketing
 redirectFrom: /buy-hostinger
-tags: []
+tags: [hosting, wordpress, tools]
 ---
 
 [Hostinger](https://www.xunpanziyou.com/specs101)是我用过速度最快，性价比也是最高的主机，甚至很多每个月25美金的主机（比如[WPengine](https://wpengine.com/plans/?coupon=wpe3free)）在某些方面都比不上hostinger。

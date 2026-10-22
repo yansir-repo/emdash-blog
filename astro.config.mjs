@@ -30,6 +30,7 @@ export default defineConfig({
 				"https://www.hostg.xyz/aff_c?offer_id=517&aff_id=40495&url_id=3965&source=cloud_website",
 		},
 		"/vip": "/",
+		"/series/effect-tutorial": { status: 301, destination: "/collections/effect-tutorial" },
 	},
 	integrations: [
 		react(),

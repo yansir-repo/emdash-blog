@@ -1,0 +1,18 @@
+# Controlled tag vocabulary. An article carries at most 3 tags; every tag must be listed here.
+wordpress: WordPress
+seo: SEO
+content: 内容营销
+ads: 广告投放
+analytics: 数据分析
+domain: 域名
+hosting: 主机
+tools: 工具
+effect: Effect
+tutorial: 教程
+guide: 专题指南
+advanced: 进阶
+errors: 错误处理
+schema: Schema
+concurrency: 并发
+testing: 测试
+observability: 可观测性

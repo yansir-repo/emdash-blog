@@ -5,7 +5,7 @@ date: 2020-07-28
 author: 颜sir
 category: marketing
 redirectFrom: /deactivated-plugin-speed
-tags: []
+tags: [wordpress]
 ---
 
 很多建站小白听前辈说，WordPress的插件会影响网站速度，就会插件产生抗拒心理，觉得用不到的插件都一定要删掉，不然就会影响网站速度，但真的会影响吗？

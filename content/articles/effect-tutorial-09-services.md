@@ -2,10 +2,9 @@
 title: "服务：接口与实现分离，Context.Service"
 description: "Effect 教程第 9 章：为什么依赖应该写进类型而不是藏在 import 里，Context.Service 如何把「能力的接口」与「能力的实现」拆开，R 参数怎样自动汇总依赖，以及服务设计里常见的几种误用。"
 date: 2026-10-08
-tags: [effect, tutorial, service, context, dependency-injection]
 category: effect
-series: effect-tutorial
-seriesOrder: 9
+chapter: 9
+tags: [effect, tutorial]
 ---
 
 前八章我们处理的是「一段计算做什么、可能怎么失败、数据长什么样」。从这一章开始换一个问题：这段计算**依赖什么**。发邮件、读数据库、拿当前时间、调用支付网关，这些都不是计算本身，而是计算所处的环境。环境怎么表达，决定了代码好不好测、好不好换、好不好读。

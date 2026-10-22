@@ -2,10 +2,9 @@
 title: "共享状态：Ref、Queue、PubSub、Semaphore 怎么选"
 description: 多个 fiber 要共享数据、互相传递工作或限制并发时，该用哪个原语？本章按「要解决的问题」而不是按 API 来分类：Ref 存值、Queue 派活、PubSub 广播、Semaphore 限流，并讲清各自的边界。
 date: 2026-10-17
-tags: [effect, tutorial, ref, queue, pubsub, semaphore]
 category: effect
-series: effect-tutorial
-seriesOrder: 18
+chapter: 18
+tags: [effect, tutorial, concurrency]
 ---
 
 第 13、14 章让你开始同时运行多个 fiber。一旦同时跑，就会冒出新问题：它们怎么共享一个计数器？一个 fiber 产生的任务怎么交给另一个？一个事件怎么让好几个 fiber 都知道？同时最多允许几个在跑？这一章不按 API 清单走，而是按这四个问题走，每个问题对应一个原语。

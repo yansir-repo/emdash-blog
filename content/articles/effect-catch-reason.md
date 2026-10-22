@@ -2,8 +2,8 @@
 title: "Effect catchReason：处理「父错误 + 嵌套 reason」的两级错误"
 description: 用 catchReason、catchReasons、unwrapReason 处理 AiError、HttpClientError 这类带嵌套 reason 的错误，对比手写二级 switch 与 catchTags，并讲清残余类型的坑。
 date: 2026-10-22
-tags: [effect, effect-advanced, error-handling, catch-reason]
 category: effect
+tags: [effect, advanced, errors]
 ---
 
 [Effect 类型化错误](/articles/effect-typed-errors)那一篇讲过，`catchTag` 按 `_tag` 精确恢复。但 v4 里一个越来越常见的错误形状，`catchTag` 只能做到一半：外层是一个稳定的「父错误」，里面的 `reason` 字段才是真正的、可枚举的失败原因。

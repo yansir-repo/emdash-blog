@@ -5,7 +5,7 @@ date: 2022-07-19
 author: 颜sir
 category: marketing
 redirectFrom: /how-much-hire-writers
-tags: []
+tags: [content, seo]
 ---
 
 做SEO需要大量内容，而想要生产高质量内容，就需要招写手，我认识很多人迟迟不敢走出第一步的原因，就在于不敢招写手，因为在他们印象里，写手的价格并不便宜。

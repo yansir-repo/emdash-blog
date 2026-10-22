@@ -2,8 +2,8 @@
 title: "Effect 前端实践：用 Atom 管理状态，让表单只有一个所有者"
 description: 前端状态混乱，往往因为同一个事实被多处持有。本文用 effect/reactivity 与 @effect/atom-react 讲 Atom 数据流、Layer 注入与持久化，以及 Schema 与表单库的边界，代码已实测。
 date: 2026-10-14
-tags: [effect, frontend, atom, react, forms]
 category: effect
+tags: [effect, guide]
 ---
 
 前面几篇讲的都是服务端风格的问题：错误、依赖、并发、运行时边界。这一篇换到浏览器里，问题其实是同一个：**每一个事实应该只有一个所有者**。

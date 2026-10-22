@@ -2,10 +2,9 @@
 title: "可观测性：日志、span、指标，先想清楚观测什么"
 description: Effect 把日志、tracing 和指标都做成内置能力，函数加一层包装就能产生 span。但工具不会替你决定该看什么。本章先讲三种信号各自回答什么问题，再讲怎么在代码里挂上去、怎么导出，以及常见的滥用方式。
 date: 2026-10-19
-tags: [effect, tutorial, observability, tracing, logging, metrics]
 category: effect
-series: effect-tutorial
-seriesOrder: 20
+chapter: 20
+tags: [effect, tutorial, observability]
 ---
 
 上一章把程序放进了宿主。程序现在在线上跑，你看不见它。这一章讨论怎么让它可见。但我想先把顺序摆正：可观测性的难点不在「怎么接入」，而在「观测什么」。

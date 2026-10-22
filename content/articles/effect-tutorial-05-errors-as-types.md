@@ -2,10 +2,9 @@
 title: "错误是类型：failure 与 defect、TaggedError、catchTag"
 description: 把错误写进 Effect 的 E 参数：区分可预期的失败（failure）与不可预期的缺陷（defect），用 TaggedError 定义领域错误，再用 catchTag 精确恢复并让类型随之收窄。
 date: 2026-10-04
-tags: [effect, tutorial, errors]
 category: effect
-series: effect-tutorial
-seriesOrder: 5
+chapter: 5
+tags: [effect, tutorial, errors]
 ---
 
 前四章我们已经知道：`Effect<A, E, R>` 里的 `E` 描述「这段计算可能怎样失败」。这一章把 `E` 讲透。核心只有一句话：**可预期的错误是一种返回值，应当像成功值一样被类型描述；不可预期的错误则不属于类型，应当走另一条通道。**

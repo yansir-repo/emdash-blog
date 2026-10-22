@@ -2,8 +2,8 @@
 title: "Effect 跑在 Cloudflare Workers 上：模块级 Runtime 与几个要小心的坑"
 description: 讲 Effect 在 Cloudflare Workers 上的实践：模块级 ManagedRuntime、每请求取 context、共享 memo map，避免重复 provide Layer 与跨请求共享状态；并把来自 GitHub issue 的两个已知问题单独标注为未复现。
 date: 2026-10-22
-tags: [effect, effect-advanced, cloudflare-workers, managed-runtime, layer]
 category: effect
+tags: [effect, advanced]
 ---
 
 Workers 的执行模型和 Node 服务进程不一样：一个 isolate 会被多个请求复用，但 I/O 对象、timer 又被绑定在发起它的请求上，global scope 里还有额外限制。把 Effect 放进去，真正要想清楚的只有一件事：**哪些东西活在 isolate 级，哪些东西必须活在请求级**。

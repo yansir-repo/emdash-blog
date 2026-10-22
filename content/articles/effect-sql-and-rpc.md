@@ -2,8 +2,8 @@
 title: "Effect 的 SQL 与 RPC：Schema 驱动的数据模型、事务与共享契约"
 description: 用 effect/sql 的 Model 从一份字段声明派生数据库与 JSON 变体，用 withTransaction 保证回滚，再用 effect/rpc 把契约放进共享文件，让传输失败和业务错误在类型里各归其位。
 date: 2026-10-10
-tags: [effect, sql, rpc, schema]
 category: effect
+tags: [effect, guide]
 ---
 
 数据库行和 RPC 消息，是我认为和 HTTP 同一类的东西：它们都是越过进程边界的数据，都不可信，都会以各种方式失败。前几篇讲过的东西在这里几乎原样复用：Schema 在入口处解码，TaggedError 描述预期失败，defect 留给「不该发生」的事，Layer 切换实现。这一篇把它们落到 `effect/sql` 和 `effect/rpc` 上。

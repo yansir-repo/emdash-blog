@@ -2,10 +2,9 @@
 title: "中断与资源安全：Scope、acquireRelease、finalizer"
 description: 讲解为什么 try/finally 在异步与中断场景下不够用，以及 Effect 如何用 Scope、acquireRelease 与 finalizer 保证资源一定释放：获取与释放成对、后进先出、中断时同样生效。
 date: 2026-10-14
-tags: [effect, tutorial, scope, resource, interrupt]
 category: effect
-series: effect-tutorial
-seriesOrder: 15
+chapter: 15
+tags: [effect, tutorial, concurrency]
 ---
 
 前两章讲了 fiber 与并发组合子，留下一个悬念：任务被中断的时候，它手里握着的连接、文件、锁怎么办？这一章把这个问题讲透。你会看到，Effect 把「资源释放」从一种需要人记住的纪律，变成了一种由结构保证的性质。

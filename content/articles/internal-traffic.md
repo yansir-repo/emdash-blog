@@ -5,7 +5,7 @@ date: 2022-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /internal-traffic
-tags: []
+tags: [analytics]
 ---
 
 如果你的IP不怎么变化，那查询到你的IP地址，然后在GA中排除对应流量即可。

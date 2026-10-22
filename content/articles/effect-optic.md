@@ -2,8 +2,8 @@
 title: "Effect Optic：不可变数据的深层读写，以及 check 到底在什么时候生效"
 description: 讲清 Effect v4 新增的 Optic 模块：Iso、Lens、Prism、Traversal 的层级与用法，和展开运算符、Schema 的分工，以及 check 在写回时并不校验的细节。
 date: 2026-10-22
-tags: [effect, effect-advanced, optic, immutability, schema]
 category: effect
+tags: [effect, advanced]
 ---
 
 只要状态是不可变的，迟早会写出这种代码：`{ ...order, address: { ...order.address, city } }`。一层还好，三层之后就是一串展开运算符，再加上「只改数组里满足条件的元素」「只改联合类型里某个分支」，样板代码的体积开始超过业务逻辑。

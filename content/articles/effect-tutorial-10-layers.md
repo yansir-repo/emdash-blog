@@ -2,10 +2,9 @@
 title: "Layer：构建依赖图、生命周期与组合"
 description: "Effect 教程第 10 章：服务的实现从哪里来。讲清 Layer 的三个参数、provide、provideMerge 与 mergeAll 的区别，资源如何建立与释放，以及依赖图只构建一次的含义。"
 date: 2026-10-09
-tags: [effect, tutorial, layer, lifecycle, dependency-graph]
 category: effect
-series: effect-tutorial
-seriesOrder: 10
+chapter: 10
+tags: [effect, tutorial]
 ---
 
 上一章我们把依赖写进了类型：业务代码声明「我需要 `Mailer`」，实现留给别人。这一章回答「别人」是谁：实现从哪来，实现自己又依赖别的东西时怎么办，数据库连接这类需要关闭的资源该怎么管。

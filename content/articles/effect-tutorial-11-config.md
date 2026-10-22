@@ -2,10 +2,9 @@
 title: "配置与密钥：Config、Redacted 与环境差异"
 description: "Effect 教程第 11 章：为什么不该直接读 process.env。讲 Config 是描述、Layer 构造时 fail-fast、withDefault 的边界、Redacted 防泄漏与 ConfigProvider 切换环境。"
 date: 2026-10-10
-tags: [effect, tutorial, config, redacted, secrets]
 category: effect
-series: effect-tutorial
-seriesOrder: 11
+chapter: 11
+tags: [effect, tutorial]
 ---
 
 配置是依赖图里最不起眼的一类叶子节点：端口、数据库地址、第三方 API 密钥。它不复杂，却是线上故障里「这个值到底是怎么变成这样的」的常客。这一章的目标是把配置也纳入前两章的框架：声明依赖、集中构建、类型可见。

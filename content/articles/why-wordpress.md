@@ -5,7 +5,7 @@ date: 2022-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /why-wordpress
-tags: []
+tags: [wordpress]
 ---
 
 这是WordPress菜鸟全面指南系列的第一篇文章。

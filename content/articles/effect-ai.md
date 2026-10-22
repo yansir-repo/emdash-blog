@@ -2,8 +2,8 @@
 title: Effect AI：把 LLM 调用当成带类型错误、可重试、可观测的服务
 description: 用 effect/ai 把 LLM 调用建模成 LanguageModel 服务：AiError 的 reason、重试与超时的顺序、ExecutionPlan 回退，全部用本地替身验证，不调用真实 API。
 date: 2026-10-18
-tags: [effect, ai, llm, retry, testing]
 category: effect
+tags: [effect, guide]
 ---
 
 LLM 调用是一个程序里最脆弱的外部依赖：慢、贵、会限流、输出不确定，provider 还随时可能换。用 `fetch` 加 `try/catch` 去写，所有这些都会被压成一个 `unknown`，调用方除了打日志什么也做不了。

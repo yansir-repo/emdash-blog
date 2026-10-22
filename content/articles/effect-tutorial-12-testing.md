@@ -2,10 +2,9 @@
 title: "测试：替身 Layer、可控的时间"
 description: "Effect 教程第 12 章：依赖用 Layer 注入之后测试怎么变简单。讲替身 Layer、用 Effect.flip 断言类型化失败、TestClock 让超时与重试不再真等，以及共享 Layer 的取舍。"
 date: 2026-10-11
-tags: [effect, tutorial, testing, testclock, vitest]
 category: effect
-series: effect-tutorial
-seriesOrder: 12
+chapter: 12
+tags: [effect, tutorial, testing]
 ---
 
 前面几章铺垫的东西，在这一章集中兑现：依赖写进类型、实现由 Layer 提供、配置可替换。测试是这套设计最直接的受益者。

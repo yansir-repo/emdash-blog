@@ -8,10 +8,9 @@ import Heading from "../../components/Heading.astro";
 import ArticleImage from "../../components/ArticleImage.astro";
 import ArticleCode from "../../components/ArticleCode.astro";
 import { annotateHeadings, firstH2Index } from "../../lib/headings";
-import SeriesNav from "../../components/SeriesNav.astro";
+import CollectionNav from "../../components/CollectionNav.astro";
 import { formatDate } from "../../lib/format-date";
-import { getSeriesChapters } from "../../lib/series";
-import { isSeries, series } from "../../consts/series";
+import { getArticle, sequenceOf, tags as tagLabels } from "../../lib/site-index";
 
 const slug = decodeSlug(Astro.params.slug);
 if (!slug) return Astro.rewrite("/404");
@@ -36,23 +35,9 @@ const components = {
 };
 const publishedAt = article.data.publishedAt;
 
-const seriesSlug = article.data.series;
-const seriesNav = await (async () => {
-	if (!isSeries(seriesSlug)) return null;
-	const { chapters, cacheHint } = await getSeriesChapters(seriesSlug);
-	if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
-	const i = chapters.findIndex((c) => c.id === article.id);
-	if (i === -1) return null;
-	const pick = (c?: (typeof chapters)[number]) => (c ? { id: c.id, title: c.data.title } : undefined);
-	return {
-		seriesTitle: series[seriesSlug].title,
-		seriesHref: `/series/${seriesSlug}`,
-		index: i + 1,
-		total: chapters.length,
-		prev: pick(chapters[i - 1]),
-		next: pick(chapters[i + 1]),
-	};
-})();
+const meta = getArticle(slug);
+const articleTags = meta?.tags ?? [];
+const sequence = sequenceOf(slug);
 ---
 
 <Base
@@ -91,11 +76,35 @@ const seriesNav = await (async () => {
 							)
 						}
 					</header>
+					{
+						articleTags.length > 0 && (
+							<ul class="mt-6 flex flex-wrap gap-2" aria-label="标签">
+								{articleTags.map((t) => (
+									<li>
+										<a href={`/tags/${t}`} class="rounded-full bg-zinc-50 px-3 py-1 text-xs font-medium text-zinc-600 ring-1 ring-zinc-900/5 transition hover:text-indigo-500 dark:bg-zinc-800/50 dark:text-zinc-400 dark:ring-white/10 dark:hover:text-indigo-400">
+											{tagLabels[t]}
+										</a>
+									</li>
+								))}
+							</ul>
+						)
+					}
 					<div class="prose mt-8 dark:prose-invert" data-article-content>
 						<PortableText value={head} components={components} />
 						{headings.length > 0 && <Toc headings={headings.filter((h) => h.depth <= 3)} />}
 						{tail.length > 0 && <PortableText value={tail} components={components} />}
-						{seriesNav && <SeriesNav {...seriesNav} />}
+						{
+							sequence && (
+								<CollectionNav
+									title={sequence.collection.title}
+									href={`/collections/${sequence.collection.slug}`}
+									index={sequence.index}
+									total={sequence.total}
+									prev={sequence.prev}
+									next={sequence.next}
+								/>
+							)
+						}
 					</div>
 				</article>
 			</div>

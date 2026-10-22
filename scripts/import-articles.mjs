@@ -6,7 +6,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { EmDashClient } from "emdash/client";
 import { markdownToPortableText } from "./lib/md-to-pt.mjs";
-import { readArticles } from "./lib/articles.mjs";
+import { readArticles, readTags } from "./lib/articles.mjs";
 
 const baseUrl = process.argv[2];
 if (!baseUrl) throw new Error("usage: import-articles.mjs <baseUrl>");
@@ -78,23 +78,41 @@ const bylineId =
 	existingBylines.find((b) => b.slug === byline.slug)?.id ??
 	unwrap(await client.request("POST", "/admin/bylines", { slug: byline.slug, displayName: byline.displayName })).id;
 
-// taxonomy terms: the schema's categories plus every tag used by an article (sample-data terms aren't seeded remotely)
+// taxonomy terms: the schema's categories plus the tag vocabulary (content/tags.yaml); ids needed to assign terms
 const wanted = {
 	category: schema.taxonomies.find((t) => t.name === "category").terms,
-	tag: [...new Set(articles.flatMap((a) => a.meta.tags ?? []))].map((slug) => ({ slug, label: slug })),
+	tag: Object.entries(readTags()).map(([slug, label]) => ({ slug, label })),
 };
+const termIds = {};
 for (const [taxonomy, terms] of Object.entries(wanted)) {
-	const have = new Set((await client.terms(taxonomy, { limit: 200 })).items.map((t) => t.slug));
-	for (const { slug, label } of terms) if (!have.has(slug)) await client.createTerm(taxonomy, { slug, label });
+	const live = (await client.terms(taxonomy, { limit: 200 })).items;
+	const have = new Map(live.map((t) => [t.slug, t.id]));
+	for (const { slug, label } of terms) {
+		if (!have.has(slug)) have.set(slug, (await client.createTerm(taxonomy, { slug, label })).id);
+	}
+	termIds[taxonomy] = have;
 }
+const desiredTerms = (a) => ({ category: [a.meta.category], tag: a.meta.tags });
+const setTerms = async (id, a) => {
+	let changed = false;
+	for (const [taxonomy, slugs] of Object.entries(desiredTerms(a))) {
+		const cur = unwrap(await client.request("GET", `/content/articles/${encodeURIComponent(id)}/terms/${taxonomy}`));
+		const curSlugs = (cur?.terms ?? cur?.items ?? cur ?? []).map((t) => t.slug).sort().join(",");
+		if (curSlugs === [...slugs].sort().join(",")) continue;
+		await client.request("POST", `/content/articles/${encodeURIComponent(id)}/terms/${taxonomy}`, {
+			termIds: slugs.map((slug) => termIds[taxonomy].get(slug)),
+		});
+		changed = true;
+	}
+	return changed;
+};
 
-const publish = (id, date) =>
-	client.request("POST", `/content/articles/${encodeURIComponent(id)}/publish`, { publishedAt: `${date}T00:00:00Z` });
-
-// existing articles: only the publish date is synced from frontmatter (body edits made in the admin are never overwritten)
+// existing articles: only frontmatter-owned metadata (publish date, category, tags) is synced; bodies edited in the admin are never overwritten
 const existing = new Set();
 const dates = new Map(articles.map((a) => [a.slug, a.meta.date]));
+const bySlug = new Map(articles.map((a) => [a.slug, a]));
 let redated = 0;
+let retagged = 0;
 for await (const item of client.listAll("articles")) {
 	existing.add(item.slug);
 	const date = dates.get(item.slug);
@@ -102,6 +120,8 @@ for await (const item of client.listAll("articles")) {
 		await publish(item.id, date);
 		redated++;
 	}
+	const a = bySlug.get(item.slug);
+	if (a && (await setTerms(item.id, a))) retagged++;
 }
 
 let created = 0;
@@ -113,13 +133,12 @@ for (const [i, a] of articles.entries()) {
 		data: {
 			title: a.meta.title,
 			excerpt: a.meta.description,
-			...(a.meta.series ? { series: a.meta.series, series_order: a.meta.seriesOrder } : {}),
 			content: markdownToPortableText(a.body, `a${i}k`),
 		},
 		bylines: [{ bylineId }],
-		taxonomies: { category: [a.meta.category], tag: a.meta.tags ?? [] },
+		taxonomies: desiredTerms(a),
 	});
 	await publish(item.id, a.meta.date);
 	created++;
 }
-console.log(`imported ${created}/${articles.length} articles (${articles.length - created} already present, ${redated} re-dated)`);
+console.log(`imported ${created}/${articles.length} articles (${articles.length - created} already present, ${redated} re-dated, ${retagged} re-tagged)`);

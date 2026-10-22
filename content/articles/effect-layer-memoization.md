@@ -2,8 +2,8 @@
 title: "Effect Layer 记忆化：v4 里嵌套 provide、fresh 与 local 到底各构建几次"
 description: v4 把 MemoMap 在嵌套的 provide 之间共享，v3 的重复构建坑变成了隐式复用。用计数器 Layer 实测嵌套、兄弟、fresh 与 local:true 的构建次数，并说明为什么仍要组合后只 provide 一次。
 date: 2026-10-22
-tags: [effect, effect-advanced, layer, memoization]
 category: effect
+tags: [effect, advanced]
 ---
 
 Layer 的记忆化是 Effect 里最容易被「默认行为」坑到的地方：一个数据库连接池被构建了两次，两份连接，两套缓存，代码却没有任何报错。v4 改了这块的默认语义，但改法比官方迁移文档一句「跨 provide 共享」要细。

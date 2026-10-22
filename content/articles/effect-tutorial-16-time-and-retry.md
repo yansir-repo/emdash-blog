@@ -2,10 +2,9 @@
 title: "时间与重试：Schedule、退避与超时"
 description: 外部调用既会慢也会偶发失败。本章讲清 Schedule 为什么是一个可组合的策略值，退避、上限与抖动怎么拼，哪些失败值得重试，以及 timeout 和 retry 谁包着谁。
 date: 2026-10-15
-tags: [effect, tutorial, schedule, retry, timeout]
 category: effect
-series: effect-tutorial
-seriesOrder: 16
+chapter: 16
+tags: [effect, tutorial]
 ---
 
 前面 15 章基本都在讲「正确的时候怎么写」。这一章讲「慢和偶发失败的时候怎么办」，也就是时间维度上的问题。外部世界有两种最常见的不确定：一次调用可能很久都不回来，一次调用可能这次失败、下次就好了。前者要回答「最多等多久」，后者要回答「要不要再来一次、隔多久、来几次」。

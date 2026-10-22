@@ -5,7 +5,7 @@ date: 2020-08-07
 author: 颜sir
 category: marketing
 redirectFrom: /domain-ownership
-tags: []
+tags: [domain]
 ---
 
 我身边很多朋友，网站都是建站公司做的，而且是全包的那种，域名也是建站公司代注册的，空间用的也是建站公司的，网站也是用建站公司的SaaS（什么是SaaS参考[Wikipedia文章](https://en.wikipedia.org/wiki/Software_as_a_service)）搭的。

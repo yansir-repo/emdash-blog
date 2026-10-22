@@ -5,7 +5,7 @@ date: 2020-07-21
 author: 颜sir
 category: marketing
 redirectFrom: /fastest-wp-hosting
-tags: []
+tags: [hosting, wordpress]
 ---
 
 我用过的WordPress主机我自己都数不过来，但要说**速度最快（同时每月价格不超过10美金）的主机**，Hostinger说第二，没主机敢说第一。

@@ -2,10 +2,9 @@
 title: "反模式合集：Effect 用歪的十一种方式"
 description: 把前面各章的结论倒过来看：十一种典型的 Effect 误用，从到处 run、悬空 Effect 到吞掉失败、无界并发、盲目重试和万物皆 Effect，每种都说明丢掉了什么保证。
 date: 2026-10-22
-tags: [effect, tutorial, anti-patterns, review]
 category: effect
-series: effect-tutorial
-seriesOrder: 23
+chapter: 23
+tags: [effect, tutorial]
 ---
 
 最后一章换个角度。前 22 章讲「应该怎么写」，这一章把它们倒过来：看看 Effect 用歪的十一种典型方式，每一种都能编译、能跑、甚至能通过演示，但都悄悄丢掉了 Effect 本该给你的某个保证。

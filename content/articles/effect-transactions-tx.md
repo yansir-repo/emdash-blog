@@ -2,8 +2,8 @@
 title: "Effect.tx 与 TxRef：用事务取代 STM 的共享状态"
 description: v4 里 STM 被 Effect.tx 加一组 Tx 数据结构取代。本文讲嵌套事务如何合并、txRetry 如何阻塞重试、怎样原子地改多个 TxRef，以及它和 Ref、Semaphore 的取舍，附实测踩坑。
 date: 2026-10-22
-tags: [effect, effect-advanced, transactions, stm, concurrency]
 category: effect
+tags: [effect, advanced, concurrency]
 ---
 
 共享可变状态里最难的不是「改一个值」，而是「同时改两个值，并且别人任何时刻都看不到改了一半的状态」。`Ref` 能保证单个值的原子更新，但两个 `Ref` 之间没有任何原子性：转账先扣 A 再加 B，中间那一刻别的 fiber 读到的总额就是错的。

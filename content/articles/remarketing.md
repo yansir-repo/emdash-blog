@@ -5,7 +5,7 @@ date: 2022-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /remarketing
-tags: []
+tags: [ads]
 ---
 
 不明白原理的人，觉得米课投广告一定花了很多钱，一个月大几十万肯定跑不了。

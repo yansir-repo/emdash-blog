@@ -2,8 +2,8 @@
 title: Effect 并发与资源管理：Fiber、Scope 与中断保证清理
 description: 从 Fiber 和 Effect.all/forEach 的并发选项讲到 Scope、acquireRelease，再到中断如何保证清理一定执行。所有代码在 Effect v4 下通过 strict 编译，并标出与 v3 的命名差异。
 date: 2026-09-30
-tags: [effect, typescript, concurrency]
 category: effect
+tags: [effect, guide, concurrency]
 ---
 
 我喜欢 Effect 的一个核心理由，是它把并发和资源清理放进了同一套语义：并发任务可以被中断，被中断的任务一定会清理资源。这两件事在 Promise 世界里是两套互不相干的手工活，在 Effect 里是一个不变量。

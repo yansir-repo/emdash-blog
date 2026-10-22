@@ -2,10 +2,9 @@
 title: "运行时边界：ManagedRuntime、与框架接合、Workers"
 description: Effect 程序只是描述，总得有人在某个地方真正运行它。本章讲清运行只发生在边缘的含义、为什么长驻进程要构建一个 ManagedRuntime，以及接入 Web 框架和 Cloudflare Workers 时边界该画在哪里。
 date: 2026-10-18
-tags: [effect, tutorial, runtime, managed-runtime, workers]
 category: effect
-series: effect-tutorial
-seriesOrder: 19
+chapter: 19
+tags: [effect, tutorial]
 ---
 
 前面 18 章，我们一直待在 Effect 的内部：组合、错误、依赖、并发、资源。这一章走到边缘，回答一个看似朴素、其实决定整个应用架构的问题：这些描述，到底在哪里、由谁、在什么时候被真正运行？

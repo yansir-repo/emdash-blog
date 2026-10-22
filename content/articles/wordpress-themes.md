@@ -5,7 +5,7 @@ date: 2022-07-20
 author: 颜sir
 category: marketing
 redirectFrom: /wordpress-themes
-tags: []
+tags: [wordpress]
 ---
 
 你可能听很多建站的前辈说，WordPress的主题特别重要，所以在真正建站前很困惑不知道用什么主题，我的答案是：

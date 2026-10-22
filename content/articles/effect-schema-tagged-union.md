@@ -2,8 +2,8 @@
 title: "Effect Schema.TaggedUnion：用判别联合建模领域状态机"
 description: "用 Effect v4 的 Schema.TaggedUnion 与 toTaggedUnion 定义判别联合，自带 match、guards 和穷尽检查；对比 Class、Opaque 与 Union 的取舍，并用它写出一个订单状态机。"
 date: 2026-10-22
-tags: [effect, effect-advanced, schema, tagged-union, domain-modeling]
 category: effect
+tags: [effect, advanced, schema]
 ---
 
 订单有「草稿、已支付、已发货、已取消」四个状态，每个状态携带的数据不一样：已发货才有运单号，已取消才有原因。最常见的建模方式是一个大对象加一个 `status: string`，再把所有状态专属字段都标成可选。这种模型能表达大量非法状态，比如「草稿却有运单号」，而且每处使用都要靠判空来猜现在是哪个状态。

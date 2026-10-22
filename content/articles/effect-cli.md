@@ -2,8 +2,8 @@
 title: "effect/cli：用类型和 Schema 写命令行工具"
 description: 用 effect/cli 的 Command、Flag、Argument 写类型安全的命令行：Schema 校验、父命令共享参数、子命令读取父参数、示例与别名、补全脚本和交互式 Prompt，全部在 4.0.5 下实测，并说明它仍是 unstable。
 date: 2026-10-22
-tags: [effect, effect-advanced, cli, prompt]
 category: effect
+tags: [effect, advanced]
 ---
 
 命令行工具的痛点很固定：参数解析、校验、帮助文本、补全脚本、交互兜底，这些代码和业务无关，却占掉大半篇幅。`effect/cli` 把它们收进一个声明式模型：Flag 和 Argument 是「带类型的解析器」，Command 把它们组合成 `Effect` 处理函数，剩下的帮助、版本、补全由框架生成。

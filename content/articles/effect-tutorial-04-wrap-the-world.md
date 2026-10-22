@@ -2,10 +2,9 @@
 title: "包装已有的世界：sync、promise、tryPromise、回调与同步/异步的统一"
 description: 教程第 4 章。梳理把同步函数、Promise、会抛异常的代码和回调式 API 包装成 Effect 的构造函数，学会在 sync、try、promise、tryPromise、callback 中做选择。
 date: 2026-10-03
-tags: [effect, tutorial, interop, tryPromise, callback]
 category: effect
-series: effect-tutorial
-seriesOrder: 4
+chapter: 4
+tags: [effect, tutorial]
 ---
 
 前面我们用 `Effect.succeed` 和 `Effect.fail` 搭了积木。但现实里的代码大多是别人的：`fetch`、`fs`、JSON 解析、第三方 SDK。这一章回答：怎么把已有的世界安全地接进 Effect。

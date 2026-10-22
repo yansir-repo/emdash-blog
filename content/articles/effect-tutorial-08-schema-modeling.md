@@ -2,10 +2,9 @@
 title: "用 Schema 建模：transform、brand 与判别联合"
 description: 从校验走向建模：用 transform 连接外部表示与内部类型，用 brand 区分形状相同的值，用判别联合让非法状态无法表示，把领域规则写进类型。
 date: 2026-10-07
-tags: [effect, tutorial, schema, modeling]
 category: effect
-series: effect-tutorial
-seriesOrder: 8
+chapter: 8
+tags: [effect, tutorial, schema]
 ---
 
 上一章的 Schema 还停留在「校验」：数据合不合格。这一章往前走一步，进入**建模**：用 Schema 表达「这个领域里什么样的值才算合法」，并让这个表达同时服务于运行时和类型系统。只引入三个概念：transform、brand、判别联合。

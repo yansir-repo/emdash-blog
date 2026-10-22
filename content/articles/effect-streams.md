@@ -2,8 +2,8 @@
 title: "Effect Stream：背压、分块，以及它和 Queue、PubSub 的关系"
 description: 讲清 Effect Stream 的 pull 背压、数组分块、buffer 策略，以及它与 Queue、PubSub 的分工，并给出何时该用 Stream 而不是数组或 async iterator 的判断标准。
 date: 2026-10-04
-tags: [effect, typescript, stream, backpressure]
 category: effect
+tags: [effect, guide]
 ---
 
 前几篇讲的都是「一个 Effect 产出一个值」。现实里有一大类问题不是这个形状：分页接口、日志文件、消息队列、WebSocket 推送，它们产出的是**随时间到达的一串值**，可能很大，可能没有尽头，中途还会失败。这一篇讲 Effect 对这类问题的答案：`Stream<A, E, R>`。

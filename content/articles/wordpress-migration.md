@@ -5,7 +5,7 @@ date: 2022-07-23
 author: 颜sir
 category: marketing
 redirectFrom: /wordpress-migration
-tags: []
+tags: [wordpress, hosting]
 ---
 
 写在最前面：绝大多数新购买的空间，都会提供一次性的迁移服务，他们的技术人员会帮你免费迁移网站，在查看本教程之前，可以先问下空间的客服，看能不能免费迁网站，如果可以，那就不必花时间读这篇文章了。

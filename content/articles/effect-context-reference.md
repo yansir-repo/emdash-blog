@@ -2,8 +2,8 @@
 title: "Context.Reference：带默认值的服务，取代 FiberRef"
 description: Context.Reference 是带默认值的服务键，读取不进 R，局部覆盖不外泄，取代了 v3 的 FiberRef。本文讲 References 内置项，以及 feature flag、per-request 配置的写法与边界。
 date: 2026-10-22
-tags: [effect, effect-advanced, context, reference, configuration]
 category: effect
+tags: [effect, advanced]
 ---
 
 有一类「服务」你并不想让它出现在类型签名里：日志级别、当前请求的租户、特性开关、追踪是否启用。它们有合理的默认值，绝大多数代码只想读，少数入口想临时改一下，改完不能泄漏到别处。

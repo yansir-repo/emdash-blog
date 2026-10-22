@@ -5,7 +5,7 @@ date: 2020-06-18
 author: 颜sir
 category: marketing
 redirectFrom: /good-domain
-tags: []
+tags: [domain, seo]
 ---
 
 在我的理解里，好域名要做到以下几点：

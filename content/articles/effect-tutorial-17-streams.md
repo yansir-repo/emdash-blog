@@ -2,10 +2,9 @@
 title: "流：Stream 与背压，以及什么时候不该用"
 description: 数据不是一次到齐，而是一批批流过来。本章讲 Stream 是什么、惰性拉取与背压怎样让内存保持有界，常用的构造、变换与消费方式，以及哪些场景用数组或 forEach 更合适。
 date: 2026-10-16
-tags: [effect, tutorial, stream, backpressure]
 category: effect
-series: effect-tutorial
-seriesOrder: 17
+chapter: 17
+tags: [effect, tutorial]
 ---
 
 到目前为止，每个 Effect 都恰好产出一个值（或失败）。但现实里很多数据不是「一个值」：分页接口一页接一页，大文件一行接一行，消息队列一条接一条。这一章讲 Effect 怎么描述「零到多个值」，以及为什么这里的关键词是**背压**。

@@ -2,10 +2,9 @@
 title: "约定与规则：哪些该机械检查、版本与 unstable 的管理"
 description: 团队约定写在文档里会过期。本章讲怎样判断一条约定该交给机器还是交给人：按能否被证伪分层为语法、类型、依赖与语境四类，并说明 Effect 4.0.5 的 @stability 标签和版本固定该怎么管理。
 date: 2026-10-21
-tags: [effect, tutorial, conventions, lint, versioning]
 category: effect
-series: effect-tutorial
-seriesOrder: 22
+chapter: 22
+tags: [effect, tutorial]
 ---
 
 前面 21 章讲了许多「应该怎么写」：运行只发生在边缘，错误放进类型，依赖走 Layer，配置走 Config。每一条单独看都有道理。到了团队里，问题换了一个形态：这些道理靠什么保持成立？

@@ -2,8 +2,8 @@
 title: "Effect Workflow：把长流程做成可恢复、幂等、可补偿的执行"
 description: 当一个业务流程要跨越进程重启与人工等待，普通 Effect.gen 就不够了。本文用 effect/workflow 讲 Activity 记忆化、三层幂等、补偿的真实语义，并用 SQLite 实测重启后的恢复。
 date: 2026-10-16
-tags: [effect, workflow, durable-execution, idempotency]
 category: effect
+tags: [effect, guide]
 ---
 
 前面几篇处理的都是「一次进程生命周期内」的问题。这一篇处理跨越生命周期的流程：下单后预留库存，大额订单要等人工审批，审批可能隔一天才来，其间服务可能重启、发布、崩溃。

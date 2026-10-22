@@ -1,0 +1,20 @@
+---
+import Base from "../../layouts/Base.astro";
+import SimpleLayout from "../../components/SimpleLayout.astro";
+import ArticleList from "../../components/ArticleList.astro";
+import { articlesWithTag, pageFromUrl, tags } from "../../lib/site-index";
+
+const slug = Astro.params.slug ?? "";
+const label = tags[slug];
+if (!label) return Astro.rewrite("/404");
+
+const all = articlesWithTag(slug);
+const { items, page, totalPages, redirect } = pageFromUrl(Astro.url, all);
+if (redirect) return Astro.redirect(redirect, 301);
+---
+
+<Base title={`标签：${label}`} description={`标签「${label}」下的全部文章。`}>
+	<SimpleLayout title={`标签：${label}`} intro={`共 ${all.length} 篇文章带有这个标签。`}>
+		<ArticleList items={items} page={page} totalPages={totalPages} basePath={`/tags/${slug}`} />
+	</SimpleLayout>
+</Base>

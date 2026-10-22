@@ -2,10 +2,9 @@
 title: "写出第一段 Effect：gen、pipe、map/flatMap，以及运行只发生在边缘"
 description: 教程第 3 章。学会用 Effect.gen 写顺序逻辑，用 pipe 与 map、flatMap、tap 做变换，理解 E 和 R 如何在组合中自动累积，以及为什么 run 只应出现在程序入口。
 date: 2026-10-02
-tags: [effect, tutorial, gen, pipe, composition]
 category: effect
-series: effect-tutorial
-seriesOrder: 3
+chapter: 3
+tags: [effect, tutorial]
 ---
 
 前两章讲了为什么和是什么。这一章动手：怎么把小的 Effect 拼成大的 Effect，以及拼好之后在哪里运行它。

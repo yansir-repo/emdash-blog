@@ -5,7 +5,7 @@ date: 2022-07-14
 author: 颜sir
 category: marketing
 redirectFrom: /seo-press
-tags: []
+tags: [seo, wordpress, tools]
 ---
 
 一个网站使用SEO插件和不用SEO插件，区别还是挺大的。

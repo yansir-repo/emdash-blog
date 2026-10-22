@@ -5,7 +5,7 @@ date: 2020-08-09
 author: 颜sir
 category: marketing
 redirectFrom: /eat-ymyl
-tags: []
+tags: [seo]
 ---
 
 影响谷歌排名的要素非常多，大大小小加起来有200多个（甚至不止），比如你肯定知道的网页加载速度、图片ALT标签、H1大标题等等等等。

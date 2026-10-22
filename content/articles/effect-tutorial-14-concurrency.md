@@ -2,10 +2,9 @@
 title: "并发组合子：all、forEach、race，并发度与失败传播"
 description: 讲清 Effect.all、Effect.forEach、Effect.race 的语义：默认顺序执行、concurrency 选项如何限制并发度、一个任务失败时其余任务会怎样，以及如何收集全部结果而不是遇错即停。
 date: 2026-10-13
-tags: [effect, tutorial, concurrency, all, race]
 category: effect
-series: effect-tutorial
-seriesOrder: 14
+chapter: 14
+tags: [effect, tutorial, concurrency]
 ---
 
 上一章讲了 fiber 与结构化并发：子任务属于父任务，父任务结束子任务被中断。但在实际代码里，你很少需要亲手 `forkChild` 再 `join`。绝大多数并发需求可以归为两类：**同时做多件事，等全部做完**；**同时做多件事，谁先好就用谁**。Effect 给这两类各提供了现成的组合子。这一章的重点是它们的**语义**：默认行为是什么，并发度怎么控制，失败时会发生什么。

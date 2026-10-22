@@ -2,8 +2,8 @@
 title: "Effect v4 的稳定性标注：@stability 标签取代 unstable 目录"
 description: 说明 Effect 4.0.5 如何用 JSDoc 的 @stability 标签而非 effect/unstable 路径标注 API 稳定性，如何用语言服务诊断管理 unstable 用法，并附可复现的扫描脚本和 4.0.5 里仍是 unstable 的模块清单。
 date: 2026-10-22
-tags: [effect, effect-advanced, stability, language-service]
 category: effect
+tags: [effect, advanced]
 ---
 
 写 Effect v4 时有一个容易被忽略、却会决定你升级成本的问题：你正在用的 API 稳不稳定。v4 beta 阶段的文档提到过 `effect/unstable/*` 这样的导入路径，到了 4.0.5，这条路径已经不存在了，稳定性改由每个导出上的 JSDoc 标签表达。

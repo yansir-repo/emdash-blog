@@ -2,8 +2,8 @@
 title: "Effect RequestResolver：把 N+1 查询合并成批，以及 Cache 的动态 TTL"
 description: 用计数器实测 Request.Class、RequestResolver、setDelay、withCache 如何把 N+1 查询合并成批，并介绍 Cache.makeWith 动态 TTL 与 ScopedCache 的惰性过期。
 date: 2026-10-22
-tags: [effect, effect-advanced, batching, request-resolver, cache]
 category: effect
+tags: [effect, advanced]
 ---
 
 N+1 查询是所有「先查列表，再对每一项补查详情」代码的宿命：查 50 篇文章，再为每篇查一次作者，一共 51 次往返。常见的补救是手写 DataLoader，或者在每个调用点预先收集 id 再批量查，前者要管一套调度，后者把批处理的逻辑泄漏到所有调用方。

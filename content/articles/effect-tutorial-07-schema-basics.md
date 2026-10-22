@@ -2,10 +2,9 @@
 title: "边界上的数据：Schema 基础，为什么不能相信 TypeScript 类型"
 description: TypeScript 类型在运行时不存在，边界上的数据只是 unknown。本章讲清 Schema 如何把类型与运行时校验合为一份定义，以及解码、失败与「只在边界校验一次」的原则。
 date: 2026-10-06
-tags: [effect, tutorial, schema]
 category: effect
-series: effect-tutorial
-seriesOrder: 7
+chapter: 7
+tags: [effect, tutorial, schema]
 ---
 
 前两章讲的是「操作失败」。这一章讲另一种更隐蔽的失败：**数据本身不是你以为的样子。** 这是 Part 2 的后半，也是进入 Schema 的第一步。

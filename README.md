@@ -15,6 +15,8 @@
 `seed/seed.json` 是 `scripts/build-seed.mjs` 生成物（已 gitignore，`dev`/`build` 前自动生成）：Markdown → Portable Text。
 只支持标题、段落、列表、引用、代码块、图片、表格、链接/粗斜体/行内代码；遇到其他语法会直接报错而不是静默渲染错。
 
+系列：frontmatter 里写 `series: <slug>` 与 `seriesOrder: <整数>`（需同时出现），系列标题在 `src/consts/series.ts`，目录页 `/series/<slug>`，文章页底部自动出现上一章/下一章。
+
 文章 frontmatter：`title`、`description`（作为摘要）、`date`（`YYYY-MM-DD`，真实发布日期）、`category`（`marketing` | `effect`）、`tags`、可选 `redirectFrom`。
 
 ## 本地开发
@@ -46,7 +48,7 @@ pnpm deploy
 
 ```bash
 npx emdash login --url https://你的域名          # 设备码授权，token 存在 ~/.config/emdash
-node scripts/import-articles.mjs https://你的域名  # 幂等：建 byline/分类/标签，创建并以 frontmatter.date 发布文章
+node scripts/import-articles.mjs https://你的域名  # 幂等：补字段、同步菜单、建 byline/分类/标签，创建并以 frontmatter.date 发布文章
 ```
 
 详见 [EmDash 部署文档](https://docs.emdashcms.com/deployment/cloudflare/)。`backdate.mjs` 仅用于本地 seed 后修正日期。

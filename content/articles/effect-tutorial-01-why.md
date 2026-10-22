@@ -1,7 +1,7 @@
 ---
 title: "为什么需要 Effect：async/await 看不见的三件事"
 description: 教程第 1 章。从一个普通的 async 函数出发，说明签名里看不见的三件事：会怎样失败、依赖了什么、能不能被取消，以及 Effect 如何把它们写进类型。
-date: 2026-10-22
+date: 2026-09-30
 tags: [effect, tutorial, motivation, typescript]
 category: effect
 series: effect-tutorial
@@ -10,7 +10,7 @@ seriesOrder: 1
 
 这是《Effect 教程：由浅入深》的第 1 章。整个系列是概念教程：讲清楚每个概念要解决什么问题、心智模型是什么、有什么取舍和误区。代码以示意为主，但用到的 API 名称都以 effect 4.0.5 为准。
 
-第一章不教任何 API，只回答一个问题：我已经有 async/await 了，为什么还要学另一套东西？
+本章不教任何 API，只回答一个问题：我已经有 async/await 了，为什么还要学另一套东西？
 
 ## 一个看起来没问题的函数
 

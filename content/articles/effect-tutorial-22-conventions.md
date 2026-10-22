@@ -1,14 +1,14 @@
 ---
 title: "约定与规则：哪些该机械检查、版本与 unstable 的管理"
 description: 团队约定写在文档里会过期。本章讲怎样判断一条约定该交给机器还是交给人：按能否被证伪分层为语法、类型、依赖与语境四类，并说明 Effect 4.0.5 的 @stability 标签和版本固定该怎么管理。
-date: 2026-10-22
+date: 2026-10-21
 tags: [effect, tutorial, conventions, lint, versioning]
 category: effect
 series: effect-tutorial
 seriesOrder: 22
 ---
 
-前面二十一章讲了许多「应该怎么写」：运行只发生在边缘，错误放进类型，依赖走 Layer，配置走 Config。每一条单独看都有道理。到了团队里，问题换了一个形态：这些道理靠什么保持成立？
+前面 21 章讲了许多「应该怎么写」：运行只发生在边缘，错误放进类型，依赖走 Layer，配置走 Config。每一条单独看都有道理。到了团队里，问题换了一个形态：这些道理靠什么保持成立？
 
 这一章不引入新的 Effect API，讲的是治理：一条约定应该由谁来守护，以及你依赖的那个库自己的稳定性怎么管。
 
@@ -85,7 +85,7 @@ seriesOrder: 22
 
 所以需要一条治理规则：**让 unstable 的使用变成可见的、有名单的。**
 
-- 默认让工具对 unstable 与 experimental 的 API 报警告，团队里每个用法都会被看见。据 `@effect/tsgo` 的 README，language service 里相应的诊断是 `unstableApiUsage` 与 `experimentalApiUsage`，并支持放行名单。这部分我没有在本地运行验证，使用前请以你安装的版本为准。
+- 默认让工具对 unstable 与 experimental 的 API 报警告，团队里每个用法都会被看见。据 `@effect/tsgo` 的 README，language service 里相应的诊断是 `unstableApiUsage` 与 `experimentalApiUsage`，并支持放行名单。这些诊断名取自该项目 README，本文没有逐一运行验证，使用前请以你安装的版本为准。
 - 对决定接受风险的模块，在放行名单里显式写下来。这份名单就是「我们依赖的 unstable 清单」，升级前逐项对照变更记录。
 - 放行的粒度越小越好：放行单个导出，而不是整个模块。
 - 如果你发布的是库，要特别留意公开类型里是否暴露了稳定性更低的类型，否则你的使用者间接依赖了它，你的版本承诺就悬空了。

@@ -41,15 +41,38 @@ const schema = JSON.parse(readFileSync(new URL("../seed/schema.json", import.met
 const articles = readArticles();
 
 // schema drift: add fields the seed schema declares but the live collection lacks (never removes or alters)
+const unwrap = (r) => r?.data ?? r;
 const live = await client.collection("articles");
 const have_fields = new Set(live.fields.map((f) => f.slug));
 for (const f of schema.collections.find((c) => c.slug === "articles").fields) {
 	if (!have_fields.has(f.slug)) await client.createField("articles", { slug: f.slug, type: f.type, label: f.label, ...(f.required ? { required: true } : {}) });
 }
 
+// menus: add schema items the live menu lacks (matched by label), then apply the schema order. Never deletes.
+for (const menu of schema.menus) {
+	const live = unwrap(await client.request("GET", `/menus/${menu.name}`));
+	const byLabel = new Map(live.items.map((i) => [i.label, i]));
+	for (const item of menu.items) {
+		if (byLabel.has(item.label)) continue;
+		const created = unwrap(
+			await client.request("POST", `/menus/${menu.name}/items`, {
+				type: item.type,
+				label: item.label,
+				customUrl: item.url,
+				...(item.target ? { target: item.target } : {}),
+			}),
+		);
+		byLabel.set(item.label, created);
+	}
+	const wanted = menu.items.map((i, sortOrder) => ({ id: byLabel.get(i.label).id, parentId: null, sortOrder }));
+	const extra = [...byLabel.values()].filter((i) => !menu.items.some((m) => m.label === i.label));
+	await client.request("POST", `/menus/${menu.name}/reorder`, {
+		items: [...wanted, ...extra.map((i, k) => ({ id: i.id, parentId: i.parentId ?? null, sortOrder: wanted.length + k }))],
+	});
+}
+
 // byline
 const byline = schema.bylines[0];
-const unwrap = (r) => r?.data ?? r;
 const existingBylines = unwrap(await client.request("GET", "/admin/bylines"))?.items ?? [];
 const bylineId =
 	existingBylines.find((b) => b.slug === byline.slug)?.id ??

@@ -1,14 +1,14 @@
 ---
 title: "运行时边界：ManagedRuntime、与框架接合、Workers"
 description: Effect 程序只是描述，总得有人在某个地方真正运行它。本章讲清运行只发生在边缘的含义、为什么长驻进程要构建一个 ManagedRuntime，以及接入 Web 框架和 Cloudflare Workers 时边界该画在哪里。
-date: 2026-10-22
+date: 2026-10-18
 tags: [effect, tutorial, runtime, managed-runtime, workers]
 category: effect
 series: effect-tutorial
 seriesOrder: 19
 ---
 
-前面十八章，我们一直待在 Effect 的内部：组合、错误、依赖、并发、资源。这一章走到边缘，回答一个看似朴素、其实决定整个应用架构的问题：这些描述，到底在哪里、由谁、在什么时候被真正运行？
+前面 18 章，我们一直待在 Effect 的内部：组合、错误、依赖、并发、资源。这一章走到边缘，回答一个看似朴素、其实决定整个应用架构的问题：这些描述，到底在哪里、由谁、在什么时候被真正运行？
 
 ## 要解决的问题
 
@@ -16,7 +16,7 @@ seriesOrder: 19
 
 现实里，你的 Effect 代码不会孤立存在。它总是被某个宿主调用：一个 CLI 的 `main`，一个 Express 或 Hono 的路由回调，一个 Next.js 的 route handler，一个 Cloudflare Worker 的 `fetch`。宿主不懂 Effect，它只会调用函数、等一个 Promise。于是你必须在宿主和 Effect 之间，放一道把「描述」变成「执行」的门。
 
-问题在于这道门怎么开。开得随意，前十八章积累的所有保证都会在门口漏掉。
+问题在于这道门怎么开。开得随意，前 18 章积累的所有保证都会在门口漏掉。
 
 ## 朴素做法为什么不够
 
@@ -107,11 +107,14 @@ export async function GET(request: Request): Promise<Response> {
 
 热重载的开发服务器是个特例。模块被反复重新执行，会不断创建新的 `ManagedRuntime`，旧的没有被 dispose。常见的缓解是把 runtime 挂在 `globalThis` 上复用，并在开发环境下明确这是一个妥协：它是为了应对宿主的模块重复执行，而不是 Effect 本身的要求。
 
-### Workers：运行时在请求内部
+### Workers：两种生命周期要分开
 
-Cloudflare Workers 的特点是：环境绑定（KV、D1、secrets）来自 `fetch(request, env)` 的参数，而不是进程级全局。所以不能在模块顶层读取 `env`，也就很难在模块顶层构建一个长期的 `ManagedRuntime`。
+Cloudflare Workers 的特点是：环境绑定（KV、D1、secrets）来自 `fetch(request, env)` 的参数，而不是进程级全局；同一个 isolate 会被多个请求复用，但 I/O 对象又绑定在发起它的请求上。所以这里要把依赖按生命周期分成两类。
 
-更自然的做法是：在 `fetch` 里把 `env` 做成一个 Layer，用 `Effect.provide` 提供给本次请求的程序，再 `runPromise`。绑定的生命周期就是这一次请求。
+- **与请求无关的静态依赖**：整个 isolate 构建一次就够，适合放进模块级的 `ManagedRuntime`。
+- **与请求绑定的依赖**：`env`、请求 id、租户。它们只能在 `fetch` 里拿到，生命周期就是这一次请求，要在 `fetch` 内部做成 Layer 或 service 提供给本次请求的程序。
+
+最简单的形态，是只有请求级依赖时，直接在 `fetch` 里 `provide` 再 `runPromise`：
 
 ```ts
 import { Context, Effect, Layer } from "effect"
@@ -131,7 +134,9 @@ export default {
 }
 ```
 
-这里的 Layer 很轻，只是把已有的值包起来，每个请求构建一次没有代价。真正昂贵、需要复用的资源，在 Workers 里往往由平台自己的绑定代理，而不是你的 Layer。Workers 上还有一些特有的坑，比如跨请求共享 I/O 对象，这部分单独写在 [Workers 的坑](/articles/effect-workers-pitfalls) 里。
+这个 Layer 只是把已有的值包起来，每个请求构建一次没有代价。但一旦静态依赖里有昂贵的东西（客户端、连接配置），在 `fetch` 里 `provide` 它们就意味着每个请求都重新构建一遍。那时的做法是模块级 runtime 加每请求取 context 的组合，细节和 Layer 构建次数的实测放在 [Workers 的坑](/articles/effect-workers-pitfalls) 里，这里不重复。
+
+边界规则在 Workers 上依然成立：模块导入期不读 `env`、不运行 Effect，只放定义。
 
 ### 一个陷阱：Effect.succeed 会立即捕获
 
@@ -155,6 +160,6 @@ export default {
 ## 延伸阅读
 
 - [Effect 运行时边界与测试：只在入口 run，用 TestClock 测时间](/articles/effect-runtime-boundaries-and-testing)
-- [Effect 在 Workers 里的坑](/articles/effect-workers-pitfalls)
-- [Effect 的服务与 Layer](/articles/effect-services-and-layers)
-- [Effect Layer 的 memoization](/articles/effect-layer-memoization)
+- [Effect 跑在 Cloudflare Workers 上：模块级 Runtime 与几个要小心的坑](/articles/effect-workers-pitfalls)
+- [Effect 服务与 Layer：把依赖写进类型里](/articles/effect-services-and-layers)
+- [Effect Layer 记忆化：v4 里嵌套 provide、fresh 与 local 到底各构建几次](/articles/effect-layer-memoization)

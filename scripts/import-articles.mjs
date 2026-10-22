@@ -107,6 +107,9 @@ const setTerms = async (id, a) => {
 	return changed;
 };
 
+const publish = (id, date) =>
+	client.request("POST", `/content/articles/${encodeURIComponent(id)}/publish`, { publishedAt: `${date}T00:00:00Z` });
+
 // existing articles: only frontmatter-owned metadata (publish date, category, tags) is synced; bodies edited in the admin are never overwritten
 const existing = new Set();
 const dates = new Map(articles.map((a) => [a.slug, a.meta.date]));
@@ -116,7 +119,8 @@ let retagged = 0;
 for await (const item of client.listAll("articles")) {
 	existing.add(item.slug);
 	const date = dates.get(item.slug);
-	if (date && item.status === "published" && !item.publishedAt?.startsWith(date)) {
+	// every article in content/ is meant to be published: a draft is the leftover of an interrupted run
+	if (date && (item.status !== "published" || !item.publishedAt?.startsWith(date))) {
 		await publish(item.id, date);
 		redated++;
 	}

@@ -1,0 +1,25 @@
+---
+interface Chapter {
+	id: string;
+	title: string;
+}
+interface Props {
+	seriesTitle: string;
+	seriesHref: string;
+	index: number;
+	total: number;
+	prev?: Chapter;
+	next?: Chapter;
+}
+const { seriesTitle, seriesHref, index, total, prev, next } = Astro.props;
+---
+
+<nav aria-label="系列导航" class="not-prose mt-12 rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+	<p class="text-sm text-zinc-600 dark:text-zinc-400">
+		本文是系列「<a href={seriesHref} class="font-medium text-indigo-500 hover:text-indigo-600">{seriesTitle}</a>」第 {index} / {total} 章
+	</p>
+	<div class="mt-4 flex flex-col gap-3 text-sm sm:flex-row sm:justify-between">
+		{prev ? <a href={`/articles/${prev.id}`} class="text-zinc-800 hover:text-indigo-500 dark:text-zinc-200">← {prev.title}</a> : <span />}
+		{next ? <a href={`/articles/${next.id}`} class="text-right text-zinc-800 hover:text-indigo-500 dark:text-zinc-200">{next.title} →</a> : <span />}
+	</div>
+</nav>

@@ -1,7 +1,11 @@
 {
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
-	"meta": { "name": "询盘自由网", "description": "颜sir 的知识库", "author": "颜sir" },
+	"meta": {
+		"name": "询盘自由网",
+		"description": "颜sir 的知识库",
+		"author": "颜sir"
+	},
 	"settings": {
 		"title": "询盘自由网",
 		"tagline": "网站有回不完的询盘，这种状态就叫询盘自由"
@@ -12,11 +16,43 @@
 			"label": "文章",
 			"labelSingular": "文章",
 			"urlPattern": "/articles/{slug}",
-			"supports": ["drafts", "revisions", "preview", "scheduling", "search", "seo"],
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"scheduling",
+				"search",
+				"seo"
+			],
 			"fields": [
-				{ "slug": "title", "label": "标题", "type": "string", "required": true, "searchable": true },
-				{ "slug": "excerpt", "label": "摘要", "type": "text" },
-				{ "slug": "content", "label": "正文", "type": "portableText", "searchable": true }
+				{
+					"slug": "title",
+					"label": "标题",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "excerpt",
+					"label": "摘要",
+					"type": "text"
+				},
+				{
+					"slug": "series",
+					"label": "系列",
+					"type": "string"
+				},
+				{
+					"slug": "series_order",
+					"label": "系列序号",
+					"type": "integer"
+				},
+				{
+					"slug": "content",
+					"label": "正文",
+					"type": "portableText",
+					"searchable": true
+				}
 			]
 		}
 	],
@@ -26,10 +62,18 @@
 			"label": "分类",
 			"labelSingular": "分类",
 			"hierarchical": false,
-			"collections": ["articles"],
+			"collections": [
+				"articles"
+			],
 			"terms": [
-				{ "slug": "marketing", "label": "建站与营销" },
-				{ "slug": "effect", "label": "Effect" }
+				{
+					"slug": "marketing",
+					"label": "建站与营销"
+				},
+				{
+					"slug": "effect",
+					"label": "Effect"
+				}
 			]
 		},
 		{
@@ -37,21 +81,56 @@
 			"label": "标签",
 			"labelSingular": "标签",
 			"hierarchical": false,
-			"collections": ["articles"],
+			"collections": [
+				"articles"
+			],
 			"terms": []
 		}
 	],
-	"bylines": [{ "id": "byline-yansir", "slug": "yansir", "displayName": "颜sir" }],
+	"bylines": [
+		{
+			"id": "byline-yansir",
+			"slug": "yansir",
+			"displayName": "颜sir"
+		}
+	],
 	"menus": [
 		{
 			"name": "primary",
 			"label": "主导航",
 			"items": [
-				{ "type": "custom", "label": "关于我", "url": "/about" },
-				{ "type": "custom", "label": "知识库", "url": "/articles" },
-				{ "type": "custom", "label": "建站课", "url": "https://www.imiker.com/learning_outcome_index.html#/", "target": "_blank" },
-				{ "type": "custom", "label": "SIO课", "url": "https://www.imiker.com/index_seo.html#/", "target": "_blank" },
-				{ "type": "custom", "label": "会员区", "url": "/vip" }
+				{
+					"type": "custom",
+					"label": "关于我",
+					"url": "/about"
+				},
+				{
+					"type": "custom",
+					"label": "知识库",
+					"url": "/articles"
+				},
+				{
+					"type": "custom",
+					"label": "Effect 教程",
+					"url": "/series/effect-tutorial"
+				},
+				{
+					"type": "custom",
+					"label": "建站课",
+					"url": "https://www.imiker.com/learning_outcome_index.html#/",
+					"target": "_blank"
+				},
+				{
+					"type": "custom",
+					"label": "SIO课",
+					"url": "https://www.imiker.com/index_seo.html#/",
+					"target": "_blank"
+				},
+				{
+					"type": "custom",
+					"label": "会员区",
+					"url": "/vip"
+				}
 			]
 		}
 	]

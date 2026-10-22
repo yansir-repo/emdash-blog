@@ -11,6 +11,8 @@ export interface Article {
   status: string;
   title: string;
   excerpt?: string;
+  series?: string;
+  series_order?: number;
   content?: PortableTextBlock[];
   createdAt: Date;
   updatedAt: Date;

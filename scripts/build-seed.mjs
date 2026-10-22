@@ -19,6 +19,7 @@ const content = {
 		data: {
 			title: a.meta.title,
 			excerpt: a.meta.description,
+			...(a.meta.series ? { series: a.meta.series, series_order: a.meta.seriesOrder } : {}),
 			content: markdownToPortableText(a.body, `a${i}k`),
 		},
 		bylines: [{ byline: "byline-yansir" }],

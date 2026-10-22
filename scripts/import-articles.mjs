@@ -40,6 +40,13 @@ const client = new EmDashClient({
 const schema = JSON.parse(readFileSync(new URL("../seed/schema.json", import.meta.url), "utf8"));
 const articles = readArticles();
 
+// schema drift: add fields the seed schema declares but the live collection lacks (never removes or alters)
+const live = await client.collection("articles");
+const have_fields = new Set(live.fields.map((f) => f.slug));
+for (const f of schema.collections.find((c) => c.slug === "articles").fields) {
+	if (!have_fields.has(f.slug)) await client.createField("articles", { slug: f.slug, type: f.type, label: f.label, ...(f.required ? { required: true } : {}) });
+}
+
 // byline
 const byline = schema.bylines[0];
 const unwrap = (r) => r?.data ?? r;
@@ -80,7 +87,12 @@ for (const [i, a] of articles.entries()) {
 	const item = await client.create("articles", {
 		slug: a.slug,
 		status: "draft",
-		data: { title: a.meta.title, excerpt: a.meta.description, content: markdownToPortableText(a.body, `a${i}k`) },
+		data: {
+			title: a.meta.title,
+			excerpt: a.meta.description,
+			...(a.meta.series ? { series: a.meta.series, series_order: a.meta.seriesOrder } : {}),
+			content: markdownToPortableText(a.body, `a${i}k`),
+		},
 		bylines: [{ bylineId }],
 		taxonomies: { category: [a.meta.category], tag: a.meta.tags ?? [] },
 	});

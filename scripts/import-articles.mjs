@@ -2,7 +2,7 @@
 // Needed for remote sites: the setup wizard applies the seed's schema/menus but not its sample content.
 // Usage: node scripts/import-articles.mjs <baseUrl>
 //   auth: EMDASH_TOKEN, else the token saved by `npx emdash login --url <baseUrl>`.
-import { readFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { EmDashClient } from "emdash/client";
 import { markdownToPortableText } from "./lib/md-to-pt.mjs";
@@ -10,12 +10,33 @@ import { readArticles } from "./lib/articles.mjs";
 
 const baseUrl = process.argv[2];
 if (!baseUrl) throw new Error("usage: import-articles.mjs <baseUrl>");
-const token =
-	process.env.EMDASH_TOKEN ??
-	JSON.parse(readFileSync(`${homedir()}/.config/emdash/auth.json`, "utf8"))[baseUrl.replace(/\/$/, "")]?.accessToken;
+const authFile = `${homedir()}/.config/emdash/auth.json`;
+const key = baseUrl.replace(/\/$/, "");
+const saved = (() => {
+	try {
+		return JSON.parse(readFileSync(authFile, "utf8"));
+	} catch {
+		return {};
+	}
+})();
+const stored = saved[key];
+const token = process.env.EMDASH_TOKEN ?? stored?.accessToken;
 if (!token) throw new Error(`no token for ${baseUrl}: run \`npx emdash login --url ${baseUrl}\``);
 
-const client = new EmDashClient({ baseUrl, token });
+const client = new EmDashClient({
+	baseUrl,
+	token,
+	// the saved access token is short-lived: refresh with the stored refresh token and persist the result
+	...(!process.env.EMDASH_TOKEN && stored?.refreshToken
+		? {
+				refreshToken: stored.refreshToken,
+				onTokenRefresh: (accessToken, expiresIn) => {
+					saved[key] = { ...stored, accessToken, expiresAt: new Date(Date.now() + expiresIn * 1000).toISOString() };
+					writeFileSync(authFile, JSON.stringify(saved, null, 2));
+				},
+			}
+		: {}),
+});
 const schema = JSON.parse(readFileSync(new URL("../seed/schema.json", import.meta.url), "utf8"));
 const articles = readArticles();
 

@@ -61,7 +61,6 @@ node scripts/import-articles.mjs https://你的域名  # 幂等：补字段、�
 
 - 构建时没有 prism；代码块用 Astro 内置 Shiki（`github-dark-default`）。
 - 原站 `uses` / `speaking` 页是模板遗留且不在导航里，未迁移。
-- 订阅表单 `/thank-you` 与原站一样仍是静态占位，尚未接邮件服务。
 - RSS 地址保持 `/feed.xml`，并带全文。
 
 ## 关于 `cf` CLI

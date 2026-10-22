@@ -2,7 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import SimpleLayout from "../../components/SimpleLayout.astro";
 import ArticleList from "../../components/ArticleList.astro";
-import { getCollection, membersOf, pageFromUrl } from "../../lib/site-index";
+import { PER_PAGE, getCollection, membersOf, pageFromUrl } from "../../lib/site-index";
 
 const collection = getCollection(Astro.params.slug ?? "");
 if (!collection) return Astro.rewrite("/404");
@@ -13,6 +13,6 @@ if (redirect) return Astro.redirect(redirect, 301);
 
 <Base title={page > 1 ? `${collection.title} 第 ${page} 页` : collection.title} description={collection.description}>
 	<SimpleLayout title={collection.title} intro={`${collection.description}（共 ${collection.members.length} 篇）`}>
-		<ArticleList items={items} page={page} totalPages={totalPages} basePath={`/collections/${collection.slug}`} numbered={collection.sort === "chapter"} />
+		<ArticleList items={items} page={page} totalPages={totalPages} basePath={`/collections/${collection.slug}`} numberFrom={collection.sort === "chapter" ? (page - 1) * PER_PAGE + 1 : undefined} />
 	</SimpleLayout>
 </Base>

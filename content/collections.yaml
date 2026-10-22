@@ -48,3 +48,9 @@
   title: 严选工具
   description: 我用过并留下来的工具：主机、加速、SEO 插件、网络方案。
   rule: { all: [tools] }
+- slug: cloudflare-tutorial
+  title: Cloudflare 教程
+  description: 从存储选型到状态与协调：KV、D1、R2、Durable Objects、Queues、Workflows 的模型、边界与取舍。
+  rule: { all: [cloudflare, tutorial] }
+  sort: chapter
+  menu: true

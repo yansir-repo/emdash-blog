@@ -16,3 +16,6 @@ schema: Schema
 concurrency: 并发
 testing: 测试
 observability: 可观测性
+cloudflare: Cloudflare
+storage: 存储
+coordination: 状态与协调

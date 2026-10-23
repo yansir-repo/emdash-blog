@@ -19,6 +19,9 @@
 	],
 	// Production hostnames (Custom Domains manage their own DNS records and certificates).
 	// www is canonical (astro.config.mjs `site`); the apex redirects to it in src/middleware.ts.
+	// workers.dev stays on (setting `routes` turns it off by default): the admin passkey was registered there
+	// and EmDash needs a sign-in at the old address to move it to www (see README, Domain).
+	"workers_dev": true,
 	"routes": [
 		{ "pattern": "www.xunpanziyou.com", "custom_domain": true },
 		{ "pattern": "xunpanziyou.com", "custom_domain": true },

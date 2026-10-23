@@ -59,7 +59,7 @@ node scripts/import-articles.mjs https://你的域名  # 幂等：补字段、�
 
 ## 域名
 
-生产域名是 `www.xunpanziyou.com`（`wrangler.jsonc` 的 `routes`，Custom Domain，DNS 与证书由 Cloudflare 管理），裸域 `xunpanziyou.com` 由 `src/middleware.ts` 301 到 `astro.config.mjs` 的 `site`。`emdash-blog.yansir.workers.dev` 仍然可访问。
+生产域名是 `www.xunpanziyou.com`（`wrangler.jsonc` 的 `routes`，Custom Domain，DNS 与证书由 Cloudflare 管理），裸域 `xunpanziyou.com` 由 `src/middleware.ts` 301 到 `astro.config.mjs` 的 `site`。`workers.dev` 地址与版本预览 URL 已关闭（`wrangler.jsonc` 里 `workers_dev` / `preview_urls` 为 `false`），只通过上述两个自定义域名访问。
 EmDash 后台的 Site URL 需要在 Settings > General 里用 Change domain 切到 `www.xunpanziyou.com`；passkey 只在注册它的地址有效，切换域名后要在新地址重新注册（见 EmDash 文档 “Move to a New Domain”）。
 
 ## 与原站的差异
